@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KAON LinkedIn Content Planner</title>
+<title>KAON Content Agent</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Noto+Sans+KR:wght@500;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <style>
 /* ============================================================
@@ -874,6 +874,121 @@ input,select,textarea{font-family:var(--font-sans)}
 .month-picker-btn:hover{background:var(--accent-light);color:var(--accent)}
 .month-picker-btn.current{background:var(--accent);color:#fff}
 .month-picker-btn.today-month{border:1.5px solid var(--accent)}
+/* ============================================================
+   POSTER STUDIO
+   ============================================================ */
+.ps-hero{display:flex;align-items:center;gap:14px;background:linear-gradient(120deg,#0b1533 0%,#14306e 55%,#1d4ed8 100%);color:#fff;border-radius:var(--radius);padding:16px 20px;margin-bottom:16px}
+.ps-hero-title{font-size:16px;font-weight:800;letter-spacing:-.01em}
+.ps-hero-sub{font-size:12px;opacity:.82;margin-top:2px}
+.ps-steps{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+.ps-step{font-size:11px;font-weight:600;padding:5px 10px;border-radius:99px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);white-space:nowrap}
+.ps-layout{display:grid;grid-template-columns:300px minmax(0,1fr) 330px;gap:16px;align-items:start}
+@media (max-width:1250px){.ps-layout{grid-template-columns:1fr}}
+.ps-panel{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:14px}
+.ps-sec{margin-bottom:16px}
+.ps-sec:last-child{margin-bottom:0}
+.ps-sec-title{font-size:11px;font-weight:700;color:var(--text-muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.ps-sec-title .num{width:18px;height:18px;border-radius:50%;background:var(--accent);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:10px;letter-spacing:0}
+.ps-field{margin-bottom:10px}
+.ps-label{font-size:11px;font-weight:600;color:var(--text-secondary);margin-bottom:5px;display:block}
+.ps-input,.ps-select,.ps-textarea{width:100%;padding:8px 9px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:12px;font-family:var(--font-sans);background:var(--bg-input);color:var(--text-primary)}
+.ps-textarea{resize:vertical;min-height:70px;line-height:1.5}
+.ps-input:focus,.ps-select:focus,.ps-textarea:focus{outline:none;border-color:var(--accent)}
+.ps-seg{display:flex;gap:4px;background:var(--bg);border-radius:var(--radius-sm);padding:3px;flex-wrap:wrap}
+.ps-seg button{flex:1;min-width:0;padding:6px 6px;font-size:11px;font-weight:600;color:var(--text-secondary);border-radius:5px;white-space:nowrap}
+.ps-seg button.active{background:var(--bg-card);color:var(--text-primary);box-shadow:var(--shadow-sm)}
+.ps-style-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.ps-style{border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:7px 8px;cursor:pointer;background:var(--bg);text-align:left;transition:border-color .12s}
+.ps-style:hover{border-color:var(--accent)}
+.ps-style.active{border-color:var(--accent);background:var(--accent-light)}
+.ps-style-sw{height:26px;border-radius:5px;margin-bottom:5px}
+.ps-style-name{font-size:11px;font-weight:700;color:var(--text-primary)}
+.ps-style-desc{font-size:10px;color:var(--text-muted);line-height:1.35}
+.ps-mode{display:flex;flex-direction:column;gap:6px}
+.ps-mode-opt{display:flex;gap:8px;align-items:flex-start;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:8px 10px;cursor:pointer;background:var(--bg)}
+.ps-mode-opt.active{border-color:var(--accent);background:var(--accent-light)}
+.ps-mode-opt b{font-size:12px;display:block;color:var(--text-primary)}
+.ps-mode-opt span{font-size:10.5px;color:var(--text-secondary);line-height:1.4}
+.ps-mode-opt .dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--text-muted);flex-shrink:0;margin-top:2px}
+.ps-mode-opt.active .dot{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 45%,transparent 50%)}
+.ps-drop{border:1.5px dashed var(--border);border-radius:var(--radius-sm);padding:12px;text-align:center;font-size:11.5px;color:var(--text-secondary);cursor:pointer;background:var(--bg);transition:all .12s}
+.ps-drop:hover,.ps-drop.drag{border-color:var(--accent);color:var(--accent);background:var(--accent-light)}
+.ps-prod-list{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.ps-prod{display:flex;align-items:center;gap:8px;padding:6px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg)}
+.ps-prod.active{border-color:var(--accent)}
+.ps-prod img{width:44px;height:44px;object-fit:contain;border-radius:4px;background:repeating-conic-gradient(#e5e7eb 0 25%,#fff 0 50%) 50%/10px 10px;flex-shrink:0}
+.ps-prod-info{flex:1;min-width:0;font-size:11px}
+.ps-prod-name{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ps-prod-warn{color:#b45309;font-size:10px;line-height:1.35}
+.ps-prod-ok{color:#15803d;font-size:10px}
+.ps-prod-btns{display:flex;flex-direction:column;gap:3px}
+.ps-mini{font-size:10px;padding:3px 7px;border-radius:5px;border:1px solid var(--border);background:var(--bg-card);color:var(--text-secondary);white-space:nowrap}
+.ps-mini:hover{border-color:var(--accent);color:var(--accent)}
+.ps-mini.danger:hover{border-color:var(--danger);color:var(--danger)}
+.ps-canvas-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+@media (min-width:1251px){.ps-canvas-wrap{position:sticky;top:calc(var(--header-h) + var(--nav-h) + 12px)}}
+.ps-canvas-frame{position:relative;width:100%;display:flex;justify-content:center;background:repeating-conic-gradient(#eef1f6 0 25%,#f8f9fc 0 50%) 50%/22px 22px;border-radius:12px;padding:14px;border:1px solid var(--border)}
+.ps-canvas-frame canvas{display:block;max-width:100%;max-height:min(620px,calc(100vh - 380px));width:auto;height:auto;border-radius:6px;box-shadow:0 10px 30px rgba(13,27,62,.18);background:#fff}
+.ps-busy{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(255,255,255,.82);border-radius:12px;font-size:13px;font-weight:600;color:var(--text-primary);text-align:center;padding:20px}
+.ps-busy.on{display:flex}
+.ps-busy .spinner{width:28px;height:28px;border-width:3px}
+.ps-busy small{font-weight:400;color:var(--text-secondary);font-size:11px}
+.ps-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.ps-gen-btn{background:linear-gradient(120deg,#1d4ed8,#7c3aed);color:#fff;font-weight:700;padding:10px 18px;border-radius:var(--radius-sm);font-size:13px;display:inline-flex;align-items:center;gap:6px;box-shadow:0 6px 18px rgba(79,70,229,.3)}
+.ps-gen-btn:hover{filter:brightness(1.08)}
+.ps-gen-btn:disabled{opacity:.6;cursor:not-allowed}
+.ps-cost{font-size:10.5px;color:var(--text-muted);text-align:center;line-height:1.5}
+.ps-variants{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.ps-variant{width:58px;height:58px;border-radius:6px;object-fit:cover;border:2px solid var(--border);cursor:pointer}
+.ps-variant.active{border-color:var(--accent)}
+.ps-note{font-size:11px;line-height:1.5;color:var(--text-secondary);background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 10px}
+.ps-note.warn{background:#fffbeb;border-color:#fcd34d;color:#92400e}
+.ps-note.err{background:#fef2f2;border-color:#fca5a5;color:#991b1b;white-space:pre-line}
+.ps-range{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--text-secondary)}
+.ps-range input{flex:1}
+.ps-range span{width:34px;text-align:right;font-family:var(--font-mono);font-size:10.5px}
+.ps-check{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--text-secondary);cursor:pointer;margin-bottom:6px}
+.ps-upcoming{display:flex;flex-direction:column;gap:5px}
+.ps-up{display:flex;align-items:center;gap:8px;font-size:11px;padding:6px 8px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);cursor:pointer}
+.ps-up:hover{border-color:var(--accent)}
+.ps-up-d{font-family:var(--font-mono);font-weight:700;font-size:10.5px;color:var(--accent);width:40px;flex-shrink:0}
+.ps-up-t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text-primary)}
+/* library */
+.ps-lib{margin-top:22px}
+.ps-lib-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.ps-lib-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.ps-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column}
+.ps-card.focus{box-shadow:0 0 0 3px var(--accent)}
+.ps-card-img{aspect-ratio:1/1;background:#eef1f6;display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer}
+.ps-card-img img{width:100%;height:100%;object-fit:contain}
+.ps-card-body{padding:10px 11px;display:flex;flex-direction:column;gap:5px;flex:1}
+.ps-card-title{font-size:12.5px;font-weight:700;color:var(--text-primary);line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ps-card-meta{font-size:10.5px;color:var(--text-secondary);line-height:1.45}
+.ps-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:99px}
+.ps-badge.draft{background:#f1f5f9;color:#475569}
+.ps-badge.scheduled{background:#dbeafe;color:#1d4ed8}
+.ps-badge.posted{background:#dcfce7;color:#15803d}
+.ps-badge.overdue{background:#fee2e2;color:#b91c1c}
+.ps-card-actions{display:flex;gap:4px;flex-wrap:wrap;margin-top:auto;padding-top:4px}
+.ps-empty{grid-column:1/-1;text-align:center;padding:30px;color:var(--text-muted);font-size:12.5px;border:1.5px dashed var(--border);border-radius:var(--radius)}
+/* schedule modal */
+.ps-modal-bg{position:fixed;inset:0;background:rgba(13,27,62,.45);z-index:7000;display:none;align-items:center;justify-content:center;padding:16px}
+.ps-modal-bg.open{display:flex}
+.ps-modal{background:var(--bg-card);border-radius:16px;width:520px;max-width:100%;max-height:90vh;overflow:auto;box-shadow:0 24px 70px rgba(0,0,0,.3)}
+.ps-modal-head{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--border)}
+.ps-modal-head b{font-size:14px;flex:1}
+.ps-modal-body{padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.ps-modal-foot{display:flex;gap:8px;justify-content:flex-end;padding:12px 18px;border-top:1px solid var(--border)}
+.ps-rec{display:flex;flex-direction:column;gap:6px}
+.ps-rec-item{display:flex;align-items:flex-start;gap:10px;padding:8px 10px;border:1.5px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;background:var(--bg)}
+.ps-rec-item:hover{border-color:var(--accent)}
+.ps-rec-item.active{border-color:var(--accent);background:var(--accent-light)}
+.ps-rec-date{font-weight:800;font-size:12.5px;color:var(--text-primary);white-space:nowrap}
+.ps-rec-why{font-size:10.5px;color:var(--text-secondary);line-height:1.45}
+.cal-chip-poster{display:flex;align-items:center;gap:4px;font-size:10px;padding:2px 5px;border-radius:4px;background:linear-gradient(90deg,#ede9fe,#e0e7ff);color:#3730a3;cursor:pointer;margin-bottom:2px;border:1px solid #c7d2fe}
+.cal-chip-poster.posted{background:#dcfce7;color:#166534;border-color:#bbf7d0}
+.cal-chip-poster .cal-chip-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+
 </style>
 </head>
 <body>
@@ -884,7 +999,7 @@ input,select,textarea{font-family:var(--font-sans)}
 <div id="authGate" class="auth-gate">
   <div class="auth-card">
     <div class="auth-logo">K</div>
-    <div class="auth-title">KAON LinkedIn Planner</div>
+    <div class="auth-title">KAON Content Agent</div>
     <div class="auth-sub">팀 계정으로 로그인하세요</div>
 
     <div class="auth-tabs">
@@ -917,7 +1032,7 @@ input,select,textarea{font-family:var(--font-sans)}
      ============================================================ -->
 <header class="header">
   <div class="header-logo">K</div>
-  <span class="header-title">KAON <span>LinkedIn</span> Planner</span>
+  <span class="header-title">KAON <span>Content</span> Agent</span>
   <span class="header-badge">BETA</span>
   <div class="header-sep"></div>
   <div class="header-kpis">
@@ -974,7 +1089,7 @@ input,select,textarea{font-family:var(--font-sans)}
       <div class="form-group">
         <label class="form-label">Repository <span class="req">*</span></label>
         <div class="form-row">
-          <input type="text" class="form-input" id="cfgRepo" placeholder="owner/repo-name (e.g. kaon-group/news-dashboard)">
+          <input type="text" class="form-input" id="cfgRepo" autocomplete="off" name="kaon_repo_setting" placeholder="owner/repo-name (e.g. kaon-group/news-dashboard)">
           <span class="form-status status-unset" id="cfgRepoStatus">○ Not set</span>
         </div>
         <div class="form-hint">Same repo used by the KAON News Dashboard (owner/repo format)</div>
@@ -982,7 +1097,7 @@ input,select,textarea{font-family:var(--font-sans)}
       <div class="form-group">
         <label class="form-label">개인 액세스 토큰</label>
         <div class="form-row">
-          <input type="password" class="form-input" id="cfgPat" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+          <input type="password" class="form-input" id="cfgPat" autocomplete="new-password" name="kaon_pat_setting" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
           <button class="btn-icon" onclick="toggleVis('cfgPat')" title="Show/hide">👁</button>
           <span class="form-status status-unset" id="cfgPatStatus">○ Not set</span>
         </div>
@@ -1007,13 +1122,34 @@ input,select,textarea{font-family:var(--font-sans)}
       <div class="form-group">
         <label class="form-label">API Key <span class="req">*</span></label>
         <div class="form-row">
-          <input type="password" class="form-input" id="cfgGroqKey" placeholder="AIza... 또는 AQ...">
+          <input type="password" class="form-input" id="cfgGroqKey" autocomplete="new-password" name="kaon_gemini_setting" placeholder="AIza... 또는 AQ...">
           <button class="btn-icon" onclick="toggleVis('cfgGroqKey')" title="Show/hide">👁</button>
           <span class="form-status status-unset" id="cfgGroqStatus">○ Not set</span>
         </div>
         <div class="form-hint">aistudio.google.com → kaon marketing 프로젝트의 <strong>...dOP8</strong> 키 사용</div>
       </div>
       <button class="btn-primary" onclick="saveGroqKey()">키 저장</button>
+    </div>
+
+
+    <!-- Gemini 이미지 생성 -->
+    <div class="settings-section">
+      <div class="settings-section-title">AI 이미지 생성 (포스터·배너)</div>
+      <div class="form-group">
+        <label class="form-label">이미지 생성용 Gemini API 키 <span style="font-weight:400;color:var(--text-muted)">(결제 연결된 키)</span></label>
+        <div class="form-row">
+          <input type="password" class="form-input" id="cfgImgKey" autocomplete="new-password" name="kaon_img_key_setting" placeholder="비워두면 위의 기본 Gemini 키 사용">
+          <button class="btn-icon" onclick="toggleVis('cfgImgKey')" title="Show/hide">👁</button>
+          <span class="form-status status-unset" id="cfgImgStatus">○ 기본 키 사용</span>
+        </div>
+        <div class="form-hint">이미지 모델은 Google 무료 한도가 없어, AI Studio에서 <b>결제(Billing)가 연결된 프로젝트의 키</b>가 필요합니다. 1장당 약 $0.07~0.13. 이 키는 이 브라우저에만 저장됩니다.</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">이미지 모델 ID <span style="font-weight:400;color:var(--text-muted)">(선택)</span></label>
+        <input type="text" class="form-input" id="cfgImgModel" autocomplete="off" name="kaon_img_model_setting" placeholder="자동: gemini-3.1-flash-image-preview → gemini-2.5-flash-image → gemini-3-pro-image-preview">
+        <div class="form-hint">비워두면 위 순서대로 자동으로 시도하고 성공한 모델을 기억합니다. Google이 모델 이름을 바꾸면 여기에 새 ID를 넣으세요.</div>
+      </div>
+      <button class="btn-primary" onclick="psSaveImgSettings()">이미지 설정 저장</button>
     </div>
 
     <!-- Data management -->
@@ -1032,8 +1168,9 @@ input,select,textarea{font-family:var(--font-sans)}
      TAB NAVIGATION
      ============================================================ -->
 <nav class="tab-nav">
-  <button class="tab-nav-btn active" id="tabBtn-planner" onclick="switchTab('planner')">📋 콘텐츠 플래너</button>
-  <button class="tab-nav-btn" id="tabBtn-generator" onclick="switchTab('generator')">✍️ 포스팅 생성기</button>
+  <button class="tab-nav-btn active" id="tabBtn-poster" onclick="switchTab('poster')">🎨 포스터·배너 제작</button>
+  <button class="tab-nav-btn" id="tabBtn-planner" onclick="switchTab('planner')">📋 기사·일정 관리</button>
+  <button class="tab-nav-btn" id="tabBtn-generator" onclick="switchTab('generator')">✍️ 포스팅 문구</button>
   <button class="tab-nav-btn" id="tabBtn-carousel" onclick="switchTab('carousel')">🎠 캐러셀 디자이너</button>
 </nav>
 
@@ -1067,7 +1204,226 @@ input,select,textarea{font-family:var(--font-sans)}
   <!-- ======================================================
        TAB 1: CONTENT PLANNER
        ====================================================== -->
-  <div id="tab-planner">
+  <!-- ======================================================
+       TAB 0: POSTER & BANNER STUDIO (AI 콘텐츠 제작)
+       ====================================================== -->
+  <div id="tab-poster" style="display:none">
+    <div class="ps-hero" id="psHero">
+      <div style="font-size:26px">🎨</div>
+      <div>
+        <div class="ps-hero-title">포스터·배너 제작</div>
+        <div class="ps-hero-sub">기사나 일정을 고르고 제품 누끼를 올리면, AI가 테크 브랜드 톤의 장면을 만들고 KAON 로고·카피는 원본 그대로 얹습니다.</div>
+      </div>
+      <div class="ps-steps">
+        <span class="ps-step">① 소재 선택</span><span class="ps-step">② AI 카피 기획</span><span class="ps-step">③ 이미지 생성</span><span class="ps-step">④ 다듬기</span><span class="ps-step">⑤ 게시 예약</span>
+      </div>
+    </div>
+
+    <div class="ps-layout">
+      <!-- LEFT: 기획 -->
+      <div class="ps-panel" id="psLeftPanel">
+        <div class="ps-sec">
+          <div class="ps-sec-title"><span class="num">1</span>소재</div>
+          <div class="ps-field">
+            <label class="ps-label">추출된 기사 주제에서 가져오기</label>
+            <select class="ps-select" id="psTopicSelect" onchange="psPickTopic(this.value)"></select>
+          </div>
+          <div class="ps-field" id="psUpcomingWrap" style="display:none">
+            <label class="ps-label">다가오는 일정으로 만들기</label>
+            <div class="ps-upcoming" id="psUpcoming"></div>
+          </div>
+          <div class="ps-field">
+            <label class="ps-label">핵심 메시지 / 소재 내용 (직접 수정 가능)</label>
+            <textarea class="ps-textarea" id="psSource" rows="4" placeholder="예) prplOS 기반 Wi-Fi 7 게이트웨이 신제품 — 하드웨어 진화와 소프트웨어 서비스 확장을 동시에 강조" oninput="psSet('sourceText', this.value)"></textarea>
+          </div>
+          <div class="ps-field">
+            <label class="ps-label">목적</label>
+            <select class="ps-select" id="psPurpose" onchange="psSet('purpose', this.value)">
+              <option value="product">제품 홍보</option>
+              <option value="event">전시회·이벤트</option>
+              <option value="tech">기술 리더십</option>
+              <option value="partner">파트너십·수주</option>
+              <option value="season">기념일·시즌</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="ps-sec">
+          <div class="ps-sec-title"><span class="num">2</span>브랜드 · 포맷</div>
+          <div class="ps-field">
+            <div class="ps-seg" id="psBrandSeg">
+              <button data-v="group" onclick="psSet('brand','group')">GROUP</button>
+              <button data-v="broadband" onclick="psSet('brand','broadband')">BROADBAND</button>
+              <button data-v="robotics" onclick="psSet('brand','robotics')">ROBOTICS</button>
+            </div>
+          </div>
+          <div class="ps-field">
+            <div class="ps-seg" id="psFormatSeg">
+              <button data-v="square" onclick="psSet('format','square')">1:1</button>
+              <button data-v="portrait" onclick="psSet('format','portrait')">4:5</button>
+              <button data-v="banner" onclick="psSet('format','banner')">1.91:1</button>
+              <button data-v="wide" onclick="psSet('format','wide')">16:9</button>
+            </div>
+            <div class="form-hint" id="psFormatHint" style="margin-top:4px"></div>
+          </div>
+          <div class="ps-field">
+            <label class="ps-label">카피 언어</label>
+            <div class="ps-seg" id="psLangSeg">
+              <button data-v="en" onclick="psSet('lang','en')">English</button>
+              <button data-v="ko" onclick="psSet('lang','ko')">한국어</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="ps-sec">
+          <div class="ps-sec-title"><span class="num">3</span>비주얼 스타일</div>
+          <div class="ps-style-grid" id="psStyleGrid"></div>
+        </div>
+
+        <div class="ps-sec">
+          <div class="ps-sec-title"><span class="num">4</span>제품 이미지 (최대 2개)</div>
+          <div class="ps-drop" id="psDrop" onclick="document.getElementById('psProductFile').click()">
+            📦 제품 누끼(투명 PNG)를 끌어다 놓거나 클릭해서 올리세요
+          </div>
+          <input type="file" id="psProductFile" accept="image/png,image/webp,image/jpeg" multiple style="display:none" onchange="psOnProductFiles(this.files);this.value=''">
+          <div class="ps-prod-list" id="psProdList"></div>
+        </div>
+
+        <div class="ps-sec">
+          <div class="ps-sec-title"><span class="num">5</span>제품 처리 방식</div>
+          <div class="ps-mode" id="psModeBox">
+            <div class="ps-mode-opt" data-v="accurate" onclick="psSet('mode','accurate')">
+              <div class="dot"></div>
+              <div><b>정확도 우선</b><span>AI는 배경만 만들고, 올린 제품 사진을 원본 그대로 합성합니다. 제품 디테일이 100% 유지됩니다.</span></div>
+            </div>
+            <div class="ps-mode-opt" data-v="natural" onclick="psSet('mode','natural')">
+              <div class="dot"></div>
+              <div><b>자연스러움 우선</b><span>AI가 제품을 장면 속에 녹여 다시 그립니다. 시안처럼 자연스럽지만 통풍구·형태가 바뀔 수 있어 꼭 확인이 필요합니다.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-primary" style="width:100%;justify-content:center;padding:10px" id="psPlanBtn" onclick="psPlanCopy()">✨ AI 카피·장면 기획</button>
+        <div class="form-hint" style="margin-top:6px;text-align:center">무료 텍스트 키로 동작합니다. 헤드라인·카피·장면 콘셉트·LinkedIn 문구를 한 번에 만듭니다.</div>
+      </div>
+
+      <!-- CENTER: 미리보기 -->
+      <div class="ps-panel ps-canvas-wrap">
+        <div class="ps-sec-title" style="align-self:flex-start;margin-bottom:0">미리보기 <span id="psSizeLabel" style="text-transform:none;letter-spacing:0;font-weight:500"></span></div>
+        <div class="ps-canvas-frame">
+          <canvas id="psCanvas" width="1080" height="1080"></canvas>
+          <div class="ps-busy" id="psBusy"><span class="spinner"></span><div id="psBusyText">AI가 장면을 생성하는 중…</div><small>보통 15~60초 걸립니다. 창을 닫지 마세요.</small></div>
+        </div>
+        <div class="ps-variants" id="psVariants"></div>
+        <div class="ps-actions">
+          <button class="ps-gen-btn" id="psGenBtn" onclick="psGenerate()">🎨 AI 이미지 생성</button>
+          <button class="btn-secondary" onclick="psClearBg()" title="AI 배경을 지우고 무료 그라데이션 배경으로 되돌립니다">↺ 기본 배경</button>
+        </div>
+        <div class="ps-cost" id="psCostNote"></div>
+        <div id="psMsg" style="width:100%"></div>
+        <div class="ps-actions">
+          <button class="btn-primary" onclick="psDownload()">⬇ PNG 다운로드</button>
+          <button class="btn-secondary" id="psSaveBtn" onclick="psSaveToLibrary()">💾 라이브러리에 저장</button>
+          <button class="btn-secondary" onclick="psNewPoster()">＋ 새 포스터</button>
+        </div>
+        <div class="form-hint" id="psEditingNote" style="display:none"></div>
+      </div>
+
+      <!-- RIGHT: 텍스트·레이아웃 -->
+      <div class="ps-panel" id="psRightPanel">
+        <div class="ps-sec">
+          <div class="ps-sec-title">카피</div>
+          <div class="ps-field">
+            <label class="ps-label">헤드라인 (줄바꿈 = Enter)</label>
+            <textarea class="ps-textarea" id="psHeadline" rows="3" style="min-height:64px;font-weight:700" oninput="psSet('headline', this.value)"></textarea>
+          </div>
+          <div class="ps-field">
+            <label class="ps-label">서브 카피 (선택)</label>
+            <input class="ps-input" id="psSubline" oninput="psSet('subline', this.value)">
+          </div>
+          <div class="ps-field">
+            <label class="ps-label">하단 태그라인 (선택) · <code>{logo}</code> 자리에 파트너 로고가 들어갑니다</label>
+            <input class="ps-input" id="psTagline" placeholder="예) Field-proven {logo} platforms." oninput="psSet('tagline', this.value)">
+          </div>
+          <div class="ps-field">
+            <label class="ps-label">파트너·인증 로고 (선택, 투명 PNG)</label>
+            <div style="display:flex;gap:6px;align-items:center">
+              <button class="ps-mini" onclick="document.getElementById('psPartnerFile').click()">로고 올리기</button>
+              <span id="psPartnerName" style="font-size:11px;color:var(--text-muted);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">없음</span>
+              <button class="ps-mini danger" id="psPartnerDel" style="display:none" onclick="psRemovePartner()">삭제</button>
+            </div>
+            <input type="file" id="psPartnerFile" accept="image/png,image/webp,image/jpeg,image/svg+xml" style="display:none" onchange="psOnPartnerFile(this.files[0]);this.value=''">
+          </div>
+        </div>
+
+        <div class="ps-sec">
+          <div class="ps-sec-title">레이아웃</div>
+          <div class="ps-field" id="psTextPosField">
+            <label class="ps-label">텍스트 위치</label>
+            <div class="ps-seg" id="psTextPosSeg">
+              <button data-v="top" onclick="psSet('textPos','top')">상단</button>
+              <button data-v="bottom" onclick="psSet('textPos','bottom')">하단</button>
+            </div>
+          </div>
+          <div class="ps-field">
+            <label class="ps-label">정렬</label>
+            <div class="ps-seg" id="psAlignSeg">
+              <button data-v="center" onclick="psSet('align','center')">가운데</button>
+              <button data-v="left" onclick="psSet('align','left')">왼쪽</button>
+            </div>
+          </div>
+          <div class="ps-field">
+            <label class="ps-label">글자색</label>
+            <div class="ps-seg" id="psTextColorSeg">
+              <button data-v="auto" onclick="psSet('textColor','auto')">자동</button>
+              <button data-v="dark" onclick="psSet('textColor','dark')">네이비</button>
+              <button data-v="light" onclick="psSet('textColor','light')">화이트</button>
+            </div>
+          </div>
+          <div class="ps-field">
+            <label class="ps-label">헤드라인 크기</label>
+            <div class="ps-range"><input type="range" id="psHeadSize" min="60" max="140" step="5" oninput="psSet('headlineSize', +this.value)"><span id="psHeadSizeV"></span></div>
+          </div>
+          <label class="ps-check"><input type="checkbox" id="psShowLogo" onchange="psSet('showLogo', this.checked)"> KAON 로고 표시</label>
+          <label class="ps-check"><input type="checkbox" id="psScrim" onchange="psSet('scrim', this.checked)"> 가독성 보정 (텍스트 뒤 은은한 그라데이션)</label>
+        </div>
+
+        <div class="ps-sec" id="psProdCtl">
+          <div class="ps-sec-title">제품 배치 <span id="psProdCtlWhich" style="text-transform:none;letter-spacing:0;font-weight:500"></span></div>
+          <div id="psProdCtlBody"></div>
+        </div>
+
+        <div class="ps-sec">
+          <div class="ps-sec-title">AI 장면 콘셉트 (영문 프롬프트)</div>
+          <textarea class="ps-textarea" id="psScene" rows="4" style="font-size:11px" placeholder="AI 카피 기획을 누르면 자동으로 채워집니다. 직접 수정해도 됩니다." oninput="psSet('scenePrompt', this.value)"></textarea>
+          <label class="ps-check" style="margin-top:6px"><input type="checkbox" id="psHiRes" onchange="psSet('hiRes', this.checked)"> 고해상도 2K로 생성 (비용 약 1.5배)</label>
+        </div>
+
+        <div class="ps-sec">
+          <div class="ps-sec-title">LinkedIn 게시 문구</div>
+          <textarea class="ps-textarea" id="psCaption" rows="6" style="font-size:11.5px" oninput="psSet('caption', this.value)" placeholder="AI 카피 기획을 누르면 함께 작성됩니다."></textarea>
+          <button class="ps-mini" style="margin-top:6px" onclick="psCopyCaption()">📋 문구 복사</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIBRARY -->
+    <div class="ps-lib" id="psLibrary">
+      <div class="ps-lib-head">
+        <h2 class="section-title" style="margin:0">📚 포스터 라이브러리 · 게시 일정</h2>
+        <div class="ps-seg" id="psLibFilter" style="margin-left:auto">
+          <button data-v="all" onclick="psSetLibFilter('all')">전체</button>
+          <button data-v="draft" onclick="psSetLibFilter('draft')">초안</button>
+          <button data-v="scheduled" onclick="psSetLibFilter('scheduled')">예약됨</button>
+          <button data-v="posted" onclick="psSetLibFilter('posted')">게시완료</button>
+          <button data-v="mine" onclick="psSetLibFilter('mine')">내 담당</button>
+        </div>
+      </div>
+      <div class="ps-lib-grid" id="psLibGrid"></div>
+    </div>
+  </div><!-- /tab-poster -->
+
+  <div id="tab-planner" style="display:none">
 
     <!-- Topic Extraction -->
     <div class="section">
@@ -1503,6 +1859,42 @@ input,select,textarea{font-family:var(--font-sans)}
 
 </div><!-- /main -->
 
+<!-- 포스터 게시 예약 모달 -->
+<div class="ps-modal-bg" id="psSchedModal" onclick="if(event.target===this)psCloseSchedule()">
+  <div class="ps-modal">
+    <div class="ps-modal-head"><span style="font-size:18px">📅</span><b id="psSchedTitle">게시 예약</b><button class="btn-icon" onclick="psCloseSchedule()">✕</button></div>
+    <div class="ps-modal-body">
+      <div style="display:flex;gap:12px;align-items:flex-start">
+        <img id="psSchedImg" style="width:96px;height:96px;object-fit:contain;border-radius:8px;background:#eef1f6;flex-shrink:0" alt="">
+        <div style="flex:1;min-width:0">
+          <div id="psSchedHeadline" style="font-weight:700;font-size:13px;line-height:1.4;white-space:pre-line"></div>
+          <div id="psSchedMeta" style="font-size:11px;color:var(--text-secondary);margin-top:4px"></div>
+        </div>
+      </div>
+      <div>
+        <label class="ps-label">추천 게시일 <span style="font-weight:400;color:var(--text-muted)">(과거 KAON 게시물 232건의 요일별 성과 + 겹치는 일정 + 다가오는 행사를 함께 봅니다)</span></label>
+        <div class="ps-rec" id="psSchedRecs"></div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <div style="flex:1;min-width:160px">
+          <label class="ps-label">게시일 직접 지정</label>
+          <input type="date" class="ps-input" id="psSchedDate">
+        </div>
+        <div style="flex:1;min-width:160px">
+          <label class="ps-label">게시 담당자 (전날·당일 알림)</label>
+          <select class="ps-select" id="psSchedAssignee"></select>
+        </div>
+      </div>
+      <div class="ps-note">게시일 <b>전날</b>과 <b>당일 오전 9시경</b>에 담당자에게 🔔 알림이 갑니다. 담당자를 비워두면 만든 사람에게 갑니다. 게시 후에는 [✅ 게시 완료]를 눌러 기록을 남겨주세요.</div>
+    </div>
+    <div class="ps-modal-foot">
+      <button class="btn-secondary" id="psSchedUnsetBtn" onclick="psUnschedule()">예약 해제</button>
+      <button class="btn-secondary" onclick="psCloseSchedule()">취소</button>
+      <button class="btn-primary" onclick="psSaveSchedule()">저장</button>
+    </div>
+  </div>
+</div>
+
 <!-- Toast container -->
 <div class="toast-container" id="toastContainer"></div>
 
@@ -1681,14 +2073,26 @@ async function doSignup() {
   }
 }
 
+function authErrorText(error) {
+  const m = (error && error.message) || String(error || '');
+  if (/failed to fetch|networkerror|load failed|fetch/i.test(m)) return '팀 서버에 연결할 수 없습니다. 서버가 일시정지 상태일 수 있습니다(무료 플랜 자동 정지). 1~2분 뒤 새로고침해보고, 계속되면 관리자에게 알려주세요.';
+  if (/invalid login credentials/i.test(m)) return '이메일 또는 비밀번호가 올바르지 않습니다. 가입한 이메일 주소(오타 포함)를 확인해주세요.';
+  if (/email not confirmed/i.test(m)) return '이메일 인증이 아직 안 됐습니다. 관리자에게 인증 처리를 요청해주세요.';
+  return '로그인 실패: ' + m;
+}
+
 async function doLogin() {
   if (!sb) { showAuthMsg('연결 오류: 페이지를 새로고침해주세요 (팀 서버에 연결할 수 없습니다)', 'error'); return; }
   const email = document.getElementById('loginEmail').value.trim();
   const password = document.getElementById('loginPassword').value;
   if (!email || !password) { showAuthMsg('이메일과 비밀번호를 입력해주세요', 'error'); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showAuthMsg('이메일 형식이 아닙니다. 브라우저 자동완성이 다른 값을 채웠는지 확인해주세요.', 'error'); return; }
   showAuthMsg('로그인 중...', '');
-  const { data, error } = await sb.auth.signInWithPassword({ email, password });
-  if (error) { showAuthMsg('로그인 실패: ' + error.message, 'error'); return; }
+  let data, error;
+  try {
+    ({ data, error } = await sb.auth.signInWithPassword({ email, password }));
+  } catch (e) { error = e; }
+  if (error) { showAuthMsg(authErrorText(error), 'error'); return; }
   await onAuthSuccess(data.session);
 }
 
@@ -1739,6 +2143,7 @@ async function onAuthSuccess(session) {
   await loadNotifications();
 
   if (typeof init === 'function') init();
+  psAfterAuth();
 }
 
 async function checkExistingSession() {
@@ -1898,6 +2303,7 @@ async function onNotifClick(id, statusKey) {
     sb.from('notifications').update({ read: true }).eq('id', id).then(()=>{});
   }
   document.getElementById('notifDropdown').classList.remove('open');
+  if (statusKey && statusKey.indexOf('poster:') === 0) { psFocusPoster(statusKey.slice(7)); return; }
   if (statusKey) openChipDetail(statusKey);
 }
 
@@ -2088,6 +2494,7 @@ function initSettingsUI() {
   if (repo) { document.getElementById('cfgRepo').value = repo;       setStatus('cfgRepoStatus',   true); }
   if (pat)  { document.getElementById('cfgPat').value  = pat;        setStatus('cfgPatStatus',     true); }
   if (key)  { document.getElementById('cfgGroqKey').value = key;   setStatus('cfgGroqStatus',  true); }
+  psInitSettings();
 }
 
 function saveGhSettings() {
@@ -2451,6 +2858,7 @@ function buildTopicCard(t, i) {
     <span class="format-badge ${fmtClass}">${fmtLabel}</span>
     ${scheduled ? `<span class="scheduled-badge">📅 ${fmtDate(scheduled)}</span>` : ''}
     <div class="topic-actions">
+      <button class="btn-sm" style="border-color:#c7d2fe;color:#4338ca" onclick="psStartFromTopic('${h(t.id)}')">🎨 포스터</button>
       <button class="btn-sm" onclick="togglePicker('${h(t.id)}')">📅 Schedule</button>
       <button class="btn-sm${isSelected ? ' btn-active' : ''}" onclick="selectTopic('${h(t.id)}');switchTab('generator')">✍️ Post</button>
     </div>
@@ -2674,7 +3082,7 @@ function renderCalendar() {
       ondragleave="onCellDragLeave(event)"
       ondrop="onCellDrop(event,'${key}')">
       <span class="cal-date">${d}</span>
-      <div class="cal-chips">${campChips}${chips}</div>
+      <div class="cal-chips">${psCalendarChips(key)}${campChips}${chips}</div>
     </div>`;
   }
 
@@ -3025,12 +3433,14 @@ function deleteVersion(topicId, idx) {
 function switchTab(tabId) {
   document.querySelectorAll('.tab-nav-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tabBtn-' + tabId).classList.add('active');
+  document.getElementById('tab-poster').style.display    = tabId === 'poster'    ? '' : 'none';
   document.getElementById('tab-planner').style.display   = tabId === 'planner'   ? '' : 'none';
   document.getElementById('tab-generator').style.display = tabId === 'generator' ? '' : 'none';
   document.getElementById('tab-carousel').style.display  = tabId === 'carousel'  ? '' : 'none';
   if (tabId === 'generator') renderTopicList();
   if (tabId === 'planner')   renderRoutineCalendar();
   if (tabId === 'carousel')  carRenderAll();
+  if (tabId === 'poster')    { psInit(); psRenderTopicSelect(); psRenderUpcoming(); psRenderLibrary(); psRender(); }
 }
 
 /* ============================================================
@@ -3053,6 +3463,7 @@ function updateKPIs() {
    RENDER ALL
    ============================================================ */
 function renderAll() {
+  if (_psInited) { psRenderTopicSelect(); psRenderUpcoming(); }
   renderTopics();
   renderTopicList();
   renderCalendar();
@@ -3958,6 +4369,1513 @@ function routineManageReset(id) {
 /* ============================================================
    INIT
    ============================================================ */
+
+/* ============================================================
+   POSTER & BANNER STUDIO
+   기사/일정 → AI 카피 기획 → (제품 누끼) → Gemini 이미지 생성 → 캔버스에서 실제 로고·폰트로 합성
+   → Supabase(posters 테이블 + posters 스토리지)에 저장 → 게시 예약/알림
+   ============================================================ */
+const SK_POSTER_DRAFT = 'lip_poster_draft_v1';
+const SK_IMG_KEY      = 'lip_gemini_image_key';
+const SK_IMG_MODEL    = 'lip_gemini_image_model';
+// 위에서부터 시도하고, "모델 없음" 응답이면 다음 후보로 자동 전환합니다 (성공한 모델은 기억).
+const IMAGE_MODEL_CHAIN = ['gemini-3.1-flash-image-preview', 'gemini-2.5-flash-image', 'gemini-3-pro-image-preview'];
+
+const POSTER_FORMATS = {
+  square:   { label: '1:1 피드 (1080×1080)',        w: 1080, h: 1080, ar: '1:1'  },
+  portrait: { label: '4:5 세로 피드 (1080×1350)',   w: 1080, h: 1350, ar: '4:5'  },
+  banner:   { label: '1.91:1 링크·배너 (1200×628)', w: 1200, h: 628,  ar: '16:9' },
+  wide:     { label: '16:9 와이드 (1920×1080)',     w: 1920, h: 1080, ar: '16:9' }
+};
+
+const POSTER_STYLES = {
+  glass: {
+    label: 'Glass & Light', desc: '밝은 스튜디오 · 유리 패널 · 블루 빛 리본', tone: 'light',
+    swatch: 'linear-gradient(120deg,#ffffff,#dbe7fb 55%,#7aa7f5)',
+    fallback: ['#fbfcff', '#e3ecfa', '#c9dbf7'],
+    prompt: 'bright airy white-to-pale-blue studio, soft diffused high-key daylight, translucent frosted glass panels with a subtle blue tint, a single flowing luminous blue light ribbon sweeping gracefully through the scene, glossy reflective white floor, clean minimal white stone pedestals, premium consumer-electronics advertising photography'
+  },
+  network: {
+    label: 'Dark Network', desc: '딥 네이비 · 빛나는 네트워크 라인', tone: 'dark',
+    swatch: 'linear-gradient(120deg,#060b1f,#0f2a66 60%,#22d3ee)',
+    fallback: ['#050a1c', '#0b1d4a', '#123a80'],
+    prompt: 'deep navy to midnight-blue backdrop, glowing cyan and electric-blue network lines with small luminous nodes, subtle particle bokeh, futuristic telecom atmosphere, cinematic rim lighting, dark glossy reflective floor'
+  },
+  studio: {
+    label: 'Clean Studio', desc: '미니멀 그라데이션 · 부드러운 그림자', tone: 'light',
+    swatch: 'linear-gradient(120deg,#ffffff,#eef0f4 60%,#d5d9e2)',
+    fallback: ['#ffffff', '#f1f3f7', '#dfe3ea'],
+    prompt: 'minimal seamless studio backdrop with a soft light-gray to white gradient, gentle soft shadows, matte surfaces, calm premium tech product photography with generous negative space'
+  },
+  dataflow: {
+    label: 'Data Flow', desc: '광섬유 빛줄기 · 속도감', tone: 'dark',
+    swatch: 'linear-gradient(120deg,#0a0a23,#3b1d8f 55%,#38bdf8)',
+    fallback: ['#07071c', '#1e1255', '#16407a'],
+    prompt: 'abstract high-speed data streams, fiber-optic light trails in blue and violet, elegant motion-blur light streaks conveying speed and connectivity, dark background with luminous accents'
+  },
+  expo: {
+    label: 'Expo Stage', desc: '전시회 무대 · 스포트라이트', tone: 'dark',
+    swatch: 'linear-gradient(120deg,#0b0b12,#1f2937 55%,#f59e0b)',
+    fallback: ['#08080e', '#161a26', '#2a3142'],
+    prompt: 'modern technology exhibition stage, dramatic overhead spotlights, thin LED light lines on a dark glossy floor, softly blurred exhibition hall in the background, premium product-launch atmosphere'
+  }
+};
+
+const POSTER_PURPOSE_LABEL = { product: '제품 홍보', event: '전시회·이벤트', tech: '기술 리더십', partner: '파트너십·수주', season: '기념일·시즌' };
+
+// 과거 KAON LinkedIn 게시물(2022.01~2026.06, 232건) 요일별 성과 — KAON_SNS_data 엑셀에서 계산
+// imp = 노출 중앙값, er = (클릭+반응+댓글+공유)/노출 중앙값(%), n = 게시 건수. getDay() 기준 1=월 … 5=금
+const WEEKDAY_STATS = {
+  1: { n: 39, imp: 1334, er: 7.8 },
+  2: { n: 35, imp: 1446, er: 8.0 },
+  3: { n: 43, imp: 1116, er: 8.1 },
+  4: { n: 42, imp: 1355, er: 8.0 },
+  5: { n: 70, imp: 1605, er: 8.8 }
+};
+const WEEKDAY_KO = ['일', '월', '화', '수', '목', '금', '토'];
+
+const ps = {
+  brand: 'broadband', format: 'square', style: 'glass', mode: 'accurate', purpose: 'product', lang: 'en',
+  topicId: '', sourceText: '', title: '',
+  headline: '', subline: '', tagline: '', caption: '', scenePrompt: '',
+  textPos: 'top', align: 'center', textColor: 'auto', headlineSize: 100, showLogo: true, scrim: true, hiRes: false,
+  products: [],        // [{ dataUrl, img, name, x, y, scale, transparent, path }]
+  activeProduct: 0,
+  partner: null,       // { dataUrl, img, name, path }
+  bg: null,            // { dataUrl, img, mode, path }  — AI 생성 결과
+  variants: [],        // 이번 세션에서 생성한 결과들 (재과금 없이 다시 고르기)
+  editingId: null, suggestDate: '',
+  busy: false, libFilter: 'all', focusId: null
+};
+state.posters = [];
+const PS_DRAFT_FIELDS = ['brand','format','style','mode','purpose','lang','topicId','sourceText','title','headline','subline','tagline','caption','scenePrompt','textPos','align','textColor','headlineSize','showLogo','scrim','hiRes'];
+
+/* ---------- 초기화 ---------- */
+let _psInited = false;
+function psInit() {
+  if (_psInited) return;
+  _psInited = true;
+  const d = lsGet(SK_POSTER_DRAFT, null);
+  if (d && typeof d === 'object') PS_DRAFT_FIELDS.forEach(k => { if (d[k] !== undefined) ps[k] = d[k]; });
+  psRenderStyleGrid();
+  psBindDrop();
+  psSyncControls();
+  psRenderProducts();
+  psRenderTopicSelect();
+  psRenderUpcoming();
+  psRenderCost();
+  psRender();
+  if (document.fonts && document.fonts.load) {
+    Promise.all([
+      document.fonts.load('800 80px "Plus Jakarta Sans"'),
+      document.fonts.load('700 40px "Plus Jakarta Sans"'),
+      document.fonts.load('800 80px "Noto Sans KR"'),
+      document.fonts.load('500 30px "Noto Sans KR"')
+    ]).then(() => psRender()).catch(() => {});
+  }
+}
+
+function psPersistDraft() {
+  const d = {};
+  PS_DRAFT_FIELDS.forEach(k => d[k] = ps[k]);
+  try { lsSet(SK_POSTER_DRAFT, d); } catch (e) { /* 저장 공간 부족 시 무시 */ }
+}
+
+let _psRenderRaf = null;
+function psSet(key, value) {
+  const prevMode = ps.mode;
+  ps[key] = value;
+  if (key === 'format' || key === 'textPos') psResetProductPositions();
+  if (key === 'mode' && ps.bg && ps.bg.mode !== value && prevMode !== value) {
+    psShowMsg(value === 'natural'
+      ? '처리 방식을 바꿨습니다. 지금 화면은 이전 방식(배경만 생성)으로 만든 이미지입니다. [🎨 AI 이미지 생성]을 다시 눌러야 제품이 장면에 녹아든 결과가 나옵니다.'
+      : '처리 방식을 바꿨습니다. 지금 화면은 AI가 제품까지 그린 이미지입니다. [🎨 AI 이미지 생성]을 다시 누르면 배경만 새로 만들고 원본 제품을 합성합니다.', 'warn');
+  }
+  if (['brand','format','style','mode','lang','textPos','align','textColor','headlineSize','showLogo','scrim','hiRes'].includes(key)) psSyncControls();
+  if (key === 'hiRes' || key === 'format') psRenderCost();
+  psPersistDraft();
+  if (_psRenderRaf) cancelAnimationFrame(_psRenderRaf);
+  _psRenderRaf = requestAnimationFrame(() => { _psRenderRaf = null; psRender(); });
+}
+
+function psSegActive(id, v) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.querySelectorAll('button').forEach(b => b.classList.toggle('active', b.dataset.v === String(v)));
+}
+
+function psSyncControls() {
+  psSegActive('psBrandSeg', ps.brand);
+  psSegActive('psFormatSeg', ps.format);
+  psSegActive('psLangSeg', ps.lang);
+  psSegActive('psTextPosSeg', ps.textPos);
+  psSegActive('psAlignSeg', ps.align);
+  psSegActive('psTextColorSeg', ps.textColor);
+  psSegActive('psLibFilter', ps.libFilter);
+  document.querySelectorAll('#psModeBox .ps-mode-opt').forEach(o => o.classList.toggle('active', o.dataset.v === ps.mode));
+  document.querySelectorAll('#psStyleGrid .ps-style').forEach(o => o.classList.toggle('active', o.dataset.v === ps.style));
+  const setVal = (id, v) => { const el = document.getElementById(id); if (el && document.activeElement !== el) el.value = v; };
+  setVal('psSource', ps.sourceText);
+  setVal('psPurpose', ps.purpose);
+  setVal('psHeadline', ps.headline);
+  setVal('psSubline', ps.subline);
+  setVal('psTagline', ps.tagline);
+  setVal('psScene', ps.scenePrompt);
+  setVal('psCaption', ps.caption);
+  setVal('psHeadSize', ps.headlineSize);
+  const hv = document.getElementById('psHeadSizeV'); if (hv) hv.textContent = ps.headlineSize + '%';
+  const chk = (id, v) => { const el = document.getElementById(id); if (el) el.checked = !!v; };
+  chk('psShowLogo', ps.showLogo); chk('psScrim', ps.scrim); chk('psHiRes', ps.hiRes);
+  const f = POSTER_FORMATS[ps.format];
+  const fh = document.getElementById('psFormatHint'); if (fh) fh.textContent = f.label + (ps.format === 'banner' ? ' · AI는 16:9로 만든 뒤 잘라 씁니다' : '');
+  const sl = document.getElementById('psSizeLabel'); if (sl) sl.textContent = `(${f.w}×${f.h})`;
+  // 가로형은 텍스트가 왼쪽 단에 고정되므로 상단/하단 선택을 숨김
+  const tpf = document.getElementById('psTextPosField'); if (tpf) tpf.style.display = psIsSide() ? 'none' : '';
+  const en = document.getElementById('psEditingNote');
+  if (en) {
+    en.style.display = ps.editingId ? '' : 'none';
+    en.textContent = ps.editingId ? '라이브러리의 포스터를 수정하고 있습니다. 저장하면 같은 포스터에 덮어씁니다(예약일·담당자 유지).' : '';
+  }
+  psRenderProductControls();
+}
+
+function psRenderStyleGrid() {
+  const g = document.getElementById('psStyleGrid');
+  if (!g) return;
+  g.innerHTML = Object.entries(POSTER_STYLES).map(([k, s]) =>
+    `<div class="ps-style" data-v="${k}" onclick="psSet('style','${k}')">
+       <div class="ps-style-sw" style="background:${s.swatch}"></div>
+       <div class="ps-style-name">${h(s.label)}</div>
+       <div class="ps-style-desc">${h(s.desc)}</div>
+     </div>`).join('');
+}
+
+function psRenderTopicSelect() {
+  const sel = document.getElementById('psTopicSelect');
+  if (!sel) return;
+  const opts = ['<option value="">— 기사 주제 선택 (선택 안 하면 직접 입력) —</option>']
+    .concat((state.topics || []).map(t => `<option value="${h(t.id)}"${t.id === ps.topicId ? ' selected' : ''}>${h(t.title)}</option>`));
+  sel.innerHTML = opts.join('');
+}
+
+function psTopicSourceText(t) {
+  const srcs = (t.sourceArticles || []).slice(0, 3).map(a => '- ' + (a.title || '')).join('\n');
+  return [t.title, t.linkedInReason, srcs ? '관련 기사:\n' + srcs : ''].filter(Boolean).join('\n');
+}
+
+function psPickTopic(id) {
+  ps.topicId = id || '';
+  const t = (state.topics || []).find(x => x.id === id);
+  if (t) {
+    ps.sourceText = psTopicSourceText(t);
+    ps.title = t.title;
+  }
+  psSyncControls();
+  psPersistDraft();
+}
+
+function psRenderUpcoming() {
+  const wrap = document.getElementById('psUpcomingWrap');
+  const box = document.getElementById('psUpcoming');
+  if (!wrap || !box || typeof routineComputeItems !== 'function') return;
+  let items = [];
+  try { items = routineComputeItems(45).filter(it => it.daysLeft >= 0).slice(0, 4); } catch (e) { items = []; }
+  if (!items.length) { wrap.style.display = 'none'; return; }
+  wrap.style.display = '';
+  box.innerHTML = items.map((it, i) => {
+    const d = it.daysLeft === 0 ? 'D-DAY' : 'D-' + it.daysLeft;
+    return `<div class="ps-up" onclick="psFromUpcoming(${i})" title="${h(it.eventName)} — ${h(it.label)}"><span class="ps-up-d">${d}</span><span class="ps-up-t">${h(it.eventName)} · ${h(it.label)}</span><span style="font-size:10px;color:var(--accent)">만들기 →</span></div>`;
+  }).join('');
+  box._items = items;
+}
+
+function psFromUpcoming(i) {
+  const box = document.getElementById('psUpcoming');
+  const it = box && box._items && box._items[i];
+  if (!it) return;
+  ps.topicId = '';
+  ps.purpose = 'event';
+  ps.title = `${it.eventName} — ${it.label}`;
+  ps.sourceText = `${it.eventName} 관련 LinkedIn 포스터 (${it.label}).\n권장 게시일: ${routineFmtDate(it.date)}\n${it.brief || ''}`.trim();
+  ps.suggestDate = dateStr(it.date.getFullYear(), it.date.getMonth() + 1, it.date.getDate());
+  psSyncControls();
+  psRenderTopicSelect();
+  psPersistDraft();
+  toast('일정 정보를 채웠습니다. 행사명·부스 번호 등 사실 정보를 확인한 뒤 [AI 카피·장면 기획]을 눌러주세요.', 'info', 5000);
+}
+
+// 콘텐츠 플래너의 주제 카드 → 포스터 제작
+function psStartFromTopic(topicId) {
+  switchTab('poster');
+  psPickTopic(topicId);
+  psRenderTopicSelect();
+  document.getElementById('psHero').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (lsStr(SK.GROQ_KEY)) psPlanCopy();
+  else toast('설정에서 Gemini API 키를 입력하면 AI가 카피를 자동 기획합니다.', 'info', 5000);
+}
+
+/* ---------- 제품 이미지 ---------- */
+function psBindDrop() {
+  const dz = document.getElementById('psDrop');
+  if (!dz || dz._bound) return;
+  dz._bound = true;
+  ['dragenter', 'dragover'].forEach(ev => dz.addEventListener(ev, e => { e.preventDefault(); dz.classList.add('drag'); }));
+  ['dragleave', 'drop'].forEach(ev => dz.addEventListener(ev, e => { e.preventDefault(); dz.classList.remove('drag'); }));
+  dz.addEventListener('drop', e => { if (e.dataTransfer && e.dataTransfer.files) psOnProductFiles(e.dataTransfer.files); });
+}
+
+function psLoadImage(src, cross) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    if (cross || /^https?:/i.test(src)) img.crossOrigin = 'anonymous';
+    img.onload = () => resolve(img);
+    img.onerror = () => reject(new Error('이미지를 불러오지 못했습니다'));
+    img.src = src;
+  });
+}
+
+function psReadFile(file) {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = () => resolve(r.result);
+    r.onerror = () => reject(new Error('파일을 읽지 못했습니다'));
+    r.readAsDataURL(file);
+  });
+}
+
+// 너무 큰 원본은 메모리·업로드 용량을 위해 긴 변 maxSide로 줄여 PNG로 정규화
+async function psNormalizeImage(dataUrl, maxSide) {
+  const img = await psLoadImage(dataUrl);
+  const s = Math.min(1, maxSide / Math.max(img.naturalWidth, img.naturalHeight));
+  const w = Math.max(1, Math.round(img.naturalWidth * s)), hgt = Math.max(1, Math.round(img.naturalHeight * s));
+  const c = document.createElement('canvas'); c.width = w; c.height = hgt;
+  c.getContext('2d').drawImage(img, 0, 0, w, hgt);
+  const out = c.toDataURL('image/png');
+  return { dataUrl: out, img: await psLoadImage(out) };
+}
+
+function psHasTransparency(img) {
+  const c = document.createElement('canvas'); c.width = 64; c.height = 64;
+  const ctx = c.getContext('2d');
+  ctx.drawImage(img, 0, 0, 64, 64);
+  const d = ctx.getImageData(0, 0, 64, 64).data;
+  let clear = 0;
+  for (let i = 3; i < d.length; i += 4) if (d[i] < 240) clear++;
+  return clear > 64 * 64 * 0.03;
+}
+
+// 투명 영역의 여백을 잘라 제품 실루엣에 딱 맞게 (배치·크기 계산이 정확해짐)
+async function psTrimTransparent(img) {
+  const c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight;
+  const ctx = c.getContext('2d'); ctx.drawImage(img, 0, 0);
+  const { data, width, height } = ctx.getImageData(0, 0, c.width, c.height);
+  let x0 = width, y0 = height, x1 = -1, y1 = -1;
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+    if (data[(y * width + x) * 4 + 3] > 12) { if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+  }
+  if (x1 < 0) return null;
+  const pad = 2;
+  x0 = Math.max(0, x0 - pad); y0 = Math.max(0, y0 - pad); x1 = Math.min(width - 1, x1 + pad); y1 = Math.min(height - 1, y1 + pad);
+  if (x0 === 0 && y0 === 0 && x1 === width - 1 && y1 === height - 1) return null;
+  const o = document.createElement('canvas'); o.width = x1 - x0 + 1; o.height = y1 - y0 + 1;
+  o.getContext('2d').drawImage(c, x0, y0, o.width, o.height, 0, 0, o.width, o.height);
+  const url = o.toDataURL('image/png');
+  return { dataUrl: url, img: await psLoadImage(url) };
+}
+
+async function psOnProductFiles(files) {
+  const list = Array.from(files || []).filter(f => /^image\//.test(f.type));
+  if (!list.length) { toast('이미지 파일(PNG/JPG/WebP)만 올릴 수 있습니다', 'error'); return; }
+  for (const f of list) {
+    if (ps.products.length >= 2) { toast('제품 이미지는 최대 2개까지입니다', 'warning'); break; }
+    if (f.size > 25 * 1024 * 1024) { toast(`${f.name}: 25MB 이하 파일만 올릴 수 있습니다`, 'error'); continue; }
+    try {
+      const raw = await psReadFile(f);
+      let norm = await psNormalizeImage(raw, 1600);
+      const transparent = psHasTransparency(norm.img);
+      if (transparent) { const t = await psTrimTransparent(norm.img); if (t) norm = t; }
+      ps.products.push({ dataUrl: norm.dataUrl, img: norm.img, name: f.name, transparent, x: 0.5, y: 0.78, scale: 0.4 });
+    } catch (e) {
+      toast(`${f.name}: ${e.message}`, 'error');
+    }
+  }
+  ps.activeProduct = Math.max(0, ps.products.length - 1);
+  psResetProductPositions();
+  psRenderProducts();
+  psSyncControls();
+  psRender();
+}
+
+function psRenderProducts() {
+  const el = document.getElementById('psProdList');
+  if (!el) return;
+  el.innerHTML = ps.products.map((p, i) => `
+    <div class="ps-prod${i === ps.activeProduct ? ' active' : ''}" onclick="ps.activeProduct=${i};psRenderProducts();psRenderProductControls()">
+      <img src="${p.dataUrl}" alt="">
+      <div class="ps-prod-info">
+        <div class="ps-prod-name">${h(p.name || ('제품 ' + (i + 1)))}</div>
+        ${p.transparent ? '<div class="ps-prod-ok">✓ 투명 배경(누끼) 확인됨</div>'
+          : '<div class="ps-prod-warn">⚠ 배경이 있는 사진입니다. 정확도 모드에선 사각형 배경이 보입니다 → [배경 제거]</div>'}
+      </div>
+      <div class="ps-prod-btns">
+        ${p.transparent ? '' : `<button class="ps-mini" onclick="event.stopPropagation();psRemoveProductBg(${i})">배경 제거</button>`}
+        <button class="ps-mini danger" onclick="event.stopPropagation();psRemoveProduct(${i})">삭제</button>
+      </div>
+    </div>`).join('');
+}
+
+function psRemoveProduct(i) {
+  ps.products.splice(i, 1);
+  ps.activeProduct = Math.max(0, Math.min(ps.activeProduct, ps.products.length - 1));
+  psResetProductPositions();
+  psRenderProducts();
+  psSyncControls();
+  psRender();
+}
+
+// 단색(흰색·회색) 배경 제거: 테두리에서 시작해 배경색과 비슷한 픽셀만 지움 (제품 내부의 흰 부분은 보존)
+async function psRemoveProductBg(i) {
+  const p = ps.products[i];
+  if (!p) return;
+  const img = p.img;
+  const c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight;
+  const ctx = c.getContext('2d'); ctx.drawImage(img, 0, 0);
+  const W = c.width, H = c.height;
+  const id = ctx.getImageData(0, 0, W, H); const d = id.data;
+  const samp = (x, y) => { const k = (y * W + x) * 4; return [d[k], d[k + 1], d[k + 2]]; };
+  const corners = [samp(0, 0), samp(W - 1, 0), samp(0, H - 1), samp(W - 1, H - 1)];
+  const bg = [0, 1, 2].map(ch => Math.round(corners.reduce((s, c2) => s + c2[ch], 0) / 4));
+  const tol = 34;
+  const near = k => Math.abs(d[k] - bg[0]) + Math.abs(d[k + 1] - bg[1]) + Math.abs(d[k + 2] - bg[2]) < tol * 3 &&
+                    Math.max(Math.abs(d[k] - bg[0]), Math.abs(d[k + 1] - bg[1]), Math.abs(d[k + 2] - bg[2])) < tol;
+  const seen = new Uint8Array(W * H);
+  const stack = [];
+  for (let x = 0; x < W; x++) { stack.push(x, 0, x, H - 1); }
+  for (let y = 0; y < H; y++) { stack.push(0, y, W - 1, y); }
+  let removed = 0;
+  while (stack.length) {
+    const y = stack.pop(), x = stack.pop();
+    if (x < 0 || y < 0 || x >= W || y >= H) continue;
+    const idx = y * W + x;
+    if (seen[idx]) continue;
+    seen[idx] = 1;
+    const k = idx * 4;
+    if (!near(k)) continue;
+    d[k + 3] = 0; removed++;
+    stack.push(x + 1, y, x - 1, y, x, y + 1, x, y - 1);
+  }
+  if (removed < W * H * 0.02) { toast('테두리에서 이어진 단색 배경을 찾지 못했습니다. 누끼(투명 PNG) 파일을 사용해주세요.', 'warning', 5000); return; }
+  // 경계 부드럽게: 지워진 픽셀과 맞닿은 픽셀은 반투명 처리
+  for (let y = 1; y < H - 1; y++) for (let x = 1; x < W - 1; x++) {
+    const k = (y * W + x) * 4;
+    if (d[k + 3] === 0) continue;
+    if (d[k - 1] === 0 || d[k + 7] === 0 || d[k - W * 4 + 3] === 0 || d[k + W * 4 + 3] === 0) d[k + 3] = Math.min(d[k + 3], 150);
+  }
+  ctx.putImageData(id, 0, 0);
+  let res = { dataUrl: c.toDataURL('image/png') }; res.img = await psLoadImage(res.dataUrl);
+  const t = await psTrimTransparent(res.img); if (t) res = t;
+  p.dataUrl = res.dataUrl; p.img = res.img; p.transparent = true; p.path = null;
+  psRenderProducts();
+  psRender();
+  toast('배경을 제거했습니다. 제품 가장자리가 깎이지 않았는지 확인해주세요.', 'success', 4000);
+}
+
+function psIsSide() { const f = POSTER_FORMATS[ps.format]; return f.w / f.h > 1.4; }
+
+function psResetProductPositions() {
+  const n = ps.products.length;
+  const side = psIsSide();
+  const bottomText = !side && ps.textPos === 'bottom';
+  const portrait = ps.format === 'portrait';
+  ps.products.forEach((p, i) => {
+    if (side) {
+      p.x = n === 1 ? 0.74 : (i === 0 ? 0.63 : 0.86); p.y = 0.88; p.scale = n === 1 ? 0.68 : 0.56;
+    } else if (bottomText) {
+      p.x = n === 1 ? 0.5 : (i === 0 ? 0.3 : 0.7); p.y = 0.56; p.scale = n === 1 ? (portrait ? 0.38 : 0.4) : 0.34;
+    } else {
+      p.x = n === 1 ? 0.5 : (i === 0 ? 0.3 : 0.7); p.y = portrait ? 0.79 : 0.78; p.scale = n === 1 ? (portrait ? 0.4 : 0.4) : 0.34;
+    }
+  });
+}
+
+function psRenderProductControls() {
+  const box = document.getElementById('psProdCtl');
+  const body = document.getElementById('psProdCtlBody');
+  const which = document.getElementById('psProdCtlWhich');
+  if (!box || !body) return;
+  if (!ps.products.length) { box.style.display = 'none'; return; }
+  box.style.display = '';
+  if (ps.bg && ps.bg.mode === 'natural') {
+    which.textContent = '';
+    body.innerHTML = '<div class="ps-note">자연스러움 모드 결과물은 AI가 제품을 장면 안에 직접 그렸기 때문에 위치·크기를 따로 조절할 수 없습니다. <b>제품 형태가 원본과 같은지 꼭 확인하세요.</b></div>';
+    return;
+  }
+  const p = ps.products[ps.activeProduct];
+  if (!p) return;
+  which.textContent = ps.products.length > 1 ? `· 제품 ${ps.activeProduct + 1} (왼쪽 목록에서 선택)` : '';
+  const row = (label, key, min, max, step, val) =>
+    `<div class="ps-field"><label class="ps-label">${label}</label><div class="ps-range"><input type="range" min="${min}" max="${max}" step="${step}" value="${val}" oninput="psSetProduct('${key}', +this.value)"><span>${Math.round(val * 100)}%</span></div></div>`;
+  body.innerHTML = row('가로 위치', 'x', 0.05, 0.95, 0.01, p.x) + row('바닥 높이', 'y', 0.3, 1, 0.01, p.y) + row('크기', 'scale', 0.15, 0.95, 0.01, p.scale) +
+    '<button class="ps-mini" onclick="psResetProductPositions();psRenderProductControls();psRender()">↺ 기본 배치로</button>';
+}
+
+function psSetProduct(key, v) {
+  const p = ps.products[ps.activeProduct];
+  if (!p) return;
+  p[key] = v;
+  psRenderProductControls();
+  psRender();
+}
+
+/* ---------- 파트너 로고 ---------- */
+async function psOnPartnerFile(file) {
+  if (!file) return;
+  try {
+    const raw = await psReadFile(file);
+    let norm = await psNormalizeImage(raw, 800);
+    if (psHasTransparency(norm.img)) { const t = await psTrimTransparent(norm.img); if (t) norm = t; }
+    ps.partner = { dataUrl: norm.dataUrl, img: norm.img, name: file.name };
+    if (ps.tagline && !ps.tagline.includes('{logo}')) toast('태그라인에 {logo}를 넣으면 그 자리에 로고가 들어갑니다. 없으면 문구 앞에 배치됩니다.', 'info', 5000);
+    psRenderPartner();
+    psRender();
+  } catch (e) { toast(e.message, 'error'); }
+}
+function psRemovePartner() { ps.partner = null; psRenderPartner(); psRender(); }
+function psRenderPartner() {
+  const n = document.getElementById('psPartnerName'), del = document.getElementById('psPartnerDel');
+  if (n) n.textContent = ps.partner ? ps.partner.name : '없음';
+  if (del) del.style.display = ps.partner ? '' : 'none';
+}
+
+/* ---------- 비용 안내 ---------- */
+function psRenderCost() {
+  const el = document.getElementById('psCostNote');
+  if (!el) return;
+  const model = lsStr(SK_IMG_MODEL) || IMAGE_MODEL_CHAIN[0];
+  const hasImgKey = !!lsStr(SK_IMG_KEY);
+  const est = ps.hiRes ? '약 $0.10' : '약 $0.07';
+  el.innerHTML = `AI 이미지 1회 생성 비용 <b>${est}</b> (Google 유료 요금, 2026년 3월 공개 단가 기준 추정) · 모델 <code>${h(model)}</code><br>` +
+    (hasImgKey ? '⚙️ 설정의 <b>이미지 생성용 키</b>를 사용합니다.' : '⚙️ 이미지 생성용 키가 없으면 기본 Gemini 키를 씁니다. 이미지 모델은 무료 한도가 없어 <b>결제가 연결된 키</b>가 필요합니다.') +
+    ' 생성 없이도 기본 배경 + 제품 + 카피로 포스터를 만들 수 있습니다.';
+}
+
+function psShowMsg(msg, type) {
+  const el = document.getElementById('psMsg');
+  if (!el) return;
+  el.innerHTML = msg ? `<div class="ps-note ${type || ''}">${h(msg)}</div>` : '';
+}
+
+/* ---------- AI 카피·장면 기획 (텍스트 모델, 무료 키) ---------- */
+function psExtractJSON(text) {
+  if (!text) return null;
+  let t = String(text).trim().replace(/^```(?:json)?/i, '').replace(/```$/, '').trim();
+  try { return JSON.parse(t); } catch (e) { /* fallthrough */ }
+  const a = t.indexOf('{'), b = t.lastIndexOf('}');
+  if (a >= 0 && b > a) { try { return JSON.parse(t.slice(a, b + 1)); } catch (e) { return null; } }
+  return null;
+}
+
+async function psPlanCopy() {
+  if (ps.busy) return;
+  const src = (ps.sourceText || '').trim();
+  if (!src) { toast('소재 내용을 입력하거나 기사 주제를 선택해주세요', 'warning'); document.getElementById('psSource').focus(); return; }
+  const btn = document.getElementById('psPlanBtn');
+  setLoading(btn, true, 'AI가 기획 중…');
+  ps.busy = true;
+  psShowMsg('');
+  const brand = BRANDS[ps.brand];
+  const style = POSTER_STYLES[ps.style];
+  const lang = ps.lang === 'ko' ? 'Korean' : 'English';
+  const system = `You are the creative director of ${brand.label}, part of KAON Group, a Korean B2B technology manufacturer (broadband CPE such as Wi-Fi gateways, set-top boxes and prplOS/RDK-based platforms; KAON Robotics makes service robots). You write LinkedIn poster copy in the confident, minimal voice of global tech brands.
+Rules:
+- Use ONLY facts in the source. Never invent product specs, numbers, customer or partner names, awards, dates or booth numbers.
+- Headline: 2 short punchy lines separated by "\\n", each line at most 38 characters (Korean: at most 16 characters per line). Parallel structure works well, e.g. "Ready for the next generation.\\nOpen to the next service."
+- subline: optional supporting line, at most 80 characters, or "".
+- tagline: short bottom line at most 40 characters, or "". If a partner/technology brand from the source deserves a logo slot, write it as e.g. "Field-proven {logo} platforms." (use {logo} only when the source names a partner/technology brand).
+- scene: an English visual brief (50-110 words) for an image model describing a symbolic composition that expresses the message (e.g. hardware vs software pedestals, light ribbons, translucent service icons). Do not describe the product's design itself. No text, letters, logos or UI labels in the scene.
+- caption: a LinkedIn post (${lang}) of 500-900 characters, short paragraphs, 3-5 relevant hashtags at the end, no fabricated facts.
+- title: a short internal Korean title (max 30 chars) for the content library.
+Respond with JSON only.`;
+  const user = `Brand: ${brand.label}
+Purpose: ${POSTER_PURPOSE_LABEL[ps.purpose]}
+Copy language: ${lang}
+Visual style chosen: ${style.label} (${style.prompt})
+Products uploaded: ${ps.products.length ? ps.products.map(p => p.name).join(', ') : 'none'}
+Source:
+${src}
+
+Return JSON with keys: title, headline, subline, tagline, scene, caption.`;
+  try {
+    const raw = await callGemini(system, user, 2000);
+    const j = psExtractJSON(raw);
+    if (!j || !j.headline) throw new Error('AI 응답을 해석하지 못했습니다. 다시 시도해주세요.');
+    ps.headline = String(j.headline).replace(/\\n/g, '\n').trim();
+    ps.subline = String(j.subline || '').trim();
+    ps.tagline = String(j.tagline || '').trim();
+    ps.scenePrompt = String(j.scene || '').trim();
+    ps.caption = String(j.caption || '').trim();
+    if (j.title) ps.title = String(j.title).trim().slice(0, 40);
+    psSyncControls();
+    psPersistDraft();
+    psRender();
+    toast('카피와 장면 콘셉트를 만들었습니다. 내용을 확인한 뒤 [🎨 AI 이미지 생성]을 눌러주세요.', 'success', 4500);
+  } catch (e) {
+    psShowMsg('AI 기획 실패: ' + e.message, 'err');
+  } finally {
+    ps.busy = false;
+    setLoading(btn, false);
+  }
+}
+
+/* ---------- AI 이미지 생성 (Gemini 이미지 모델, 유료) ---------- */
+function psProductZoneText() {
+  const n = ps.products.length || 1;
+  if (psIsSide()) return n > 1 ? 'two empty display spots side by side in the right half of the frame, near the bottom' : 'one empty display spot in the right half of the frame, near the bottom';
+  if (ps.textPos === 'bottom') return n > 1 ? 'two empty pedestals side by side in the upper-middle area' : 'one empty pedestal in the center of the upper-middle area';
+  return n > 1 ? 'two empty pedestals side by side, left and right, in the lower half of the frame' : 'one empty pedestal in the center of the lower half of the frame';
+}
+
+function psTextZoneText() {
+  if (psIsSide()) return 'Keep the LEFT 48% of the frame calm, softly lit and uncluttered (smooth background only) for typography that will be added later.';
+  if (ps.textPos === 'bottom') return 'Keep the BOTTOM 40% of the frame calm and uncluttered (smooth background only) for typography added later.';
+  return 'Keep the TOP 30% of the frame calm and uncluttered (smooth background only) for a headline added later, and keep the bottom 18% calm for a tagline and logo line.';
+}
+
+function psBuildImagePrompt(withProducts) {
+  const st = POSTER_STYLES[ps.style];
+  const brand = BRANDS[ps.brand];
+  const f = POSTER_FORMATS[ps.format];
+  const concept = ps.scenePrompt || 'an elegant symbolic composition about next-generation connectivity and digital services';
+  const common = `Visual style: ${st.prompt}. Creative concept: ${concept} Use ${brand.primary} as a subtle accent color only where it fits. Photorealistic high-end 3D advertising render, crisp, balanced, premium B2B technology brand look, ${f.ar} aspect ratio. ${psTextZoneText()} ABSOLUTELY NO text, letters, numbers, words, logos, trademarks, watermarks or UI labels anywhere in the image.`;
+  if (!withProducts) {
+    return `Create an advertising background scene WITHOUT any product, device, router, box or gadget in it. ${common} Include ${psProductZoneText()} where real product photos will be composited later; light those spots consistently so a placed product looks natural.`;
+  }
+  return `Create an advertising scene that features the product(s) shown in the attached photo(s). Preserve every product EXACTLY as photographed: identical silhouette, proportions, colors, materials, vent holes, ports, buttons, LEDs and surface details. Do not redesign, restyle, simplify, add or remove any part, and do not put any logo or text on the product. Place ${ps.products.length > 1 ? 'the products' : 'the product'} at: ${psProductZoneText().replace(/empty /g, '')}, integrated with realistic lighting, contact shadows and reflections. ${common}`;
+}
+
+function psDataUrlToInline(dataUrl) {
+  const m = /^data:([^;]+);base64,(.*)$/.exec(dataUrl || '');
+  return m ? { mime: m[1], b64: m[2] } : null;
+}
+
+async function psProductForApi(p) {
+  // API 전송량을 줄이기 위해 긴 변 1024px로 축소한 PNG 전송 (투명 유지)
+  const norm = await psNormalizeImage(p.dataUrl, 1024);
+  return psDataUrlToInline(norm.dataUrl);
+}
+
+async function callGeminiImage(prompt, images, aspectRatio, hiRes) {
+  const key = lsStr(SK_IMG_KEY) || lsStr(SK.GROQ_KEY);
+  if (!key) throw new Error('Gemini API 키가 없습니다. ⚙️ 설정에서 "이미지 생성용 키"(결제 연결된 키)를 입력해주세요.');
+  const preferred = lsStr(SK_IMG_MODEL);
+  const chain = [preferred].concat(IMAGE_MODEL_CHAIN).filter((v, i, a) => v && a.indexOf(v) === i);
+  let lastErr = null;
+  for (const model of chain) {
+    try {
+      const out = await _geminiImageOnce(model, key, prompt, images, aspectRatio, hiRes);
+      if (preferred !== model) lsSetStr(SK_IMG_MODEL, model);
+      return out;
+    } catch (e) {
+      lastErr = e;
+      if (e.code === 'MODEL_UNAVAILABLE') { console.warn('[image] 모델 사용 불가, 다음 후보로:', model, e.message); continue; }
+      throw e;
+    }
+  }
+  throw new Error('사용 가능한 이미지 모델을 찾지 못했습니다. (' + (lastErr ? lastErr.message : '') + ')\n⚙️ 설정에서 모델 ID를 직접 지정해보세요.');
+}
+
+async function _geminiImageOnce(model, key, prompt, images, aspectRatio, hiRes) {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`;
+  const imageConfig = { aspectRatio };
+  if (hiRes && !/^gemini-2\./.test(model)) imageConfig.imageSize = '2K';
+  const body = {
+    contents: [{ role: 'user', parts: images.map(im => ({ inline_data: { mime_type: im.mime, data: im.b64 } })).concat([{ text: prompt }]) }],
+    generationConfig: { responseModalities: ['TEXT', 'IMAGE'], imageConfig }
+  };
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 180000);
+  let res;
+  try {
+    res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key }, body: JSON.stringify(body), signal: ctrl.signal });
+  } catch (e) {
+    if (e.name === 'AbortError') throw new Error('이미지 생성이 3분 안에 끝나지 않았습니다. 잠시 후 다시 시도해주세요.');
+    throw new Error('Google 서버에 연결하지 못했습니다 (' + e.message + '). 인터넷 연결을 확인해주세요.');
+  } finally {
+    clearTimeout(timer);
+  }
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    const msg = (data.error && data.error.message) || '';
+    if (res.status === 404 || /not found|is not supported|does not support|response modalit|unknown name "imageConfig"|imageConfig/i.test(msg)) {
+      if (hiRes && /imageSize|image_size/i.test(msg)) return _geminiImageOnce(model, key, prompt, images, aspectRatio, false);
+      const e = new Error(msg || 'HTTP ' + res.status); e.code = 'MODEL_UNAVAILABLE'; throw e;
+    }
+    if (res.status === 400 && /API key not valid|API_KEY_INVALID/i.test(msg)) throw new Error('API 키가 올바르지 않습니다. ⚙️ 설정에서 키를 다시 확인해주세요.');
+    if (res.status === 429) {
+      if (/limit:\s*0|free_tier|free tier/i.test(msg)) throw new Error('이 API 키로는 이미지 모델을 쓸 수 없습니다 (무료 한도 0).\n→ aistudio.google.com 에서 이 키의 프로젝트에 결제(Billing)를 연결하거나, 결제가 연결된 키를 ⚙️ 설정의 "이미지 생성용 키"에 넣어주세요.');
+      throw new Error('요청 한도를 넘었습니다 (HTTP 429). 1~2분 뒤 다시 시도해주세요.');
+    }
+    if (res.status === 403) throw new Error('권한이 없습니다 (HTTP 403). 키의 프로젝트에서 Generative Language API가 켜져 있는지, 결제가 연결돼 있는지 확인해주세요.\n' + msg);
+    if (res.status === 400 && /billing|FAILED_PRECONDITION/i.test(msg)) throw new Error('결제가 필요한 모델입니다. aistudio.google.com 에서 결제를 연결해주세요.\n' + msg);
+    throw new Error(`이미지 생성 실패 (HTTP ${res.status}) ${msg}`);
+  }
+  const cand = data.candidates && data.candidates[0];
+  const parts = (cand && cand.content && cand.content.parts) || [];
+  const imgPart = parts.find(p => p.inlineData || p.inline_data);
+  if (!imgPart) {
+    const reason = (cand && cand.finishReason) || (data.promptFeedback && data.promptFeedback.blockReason) || '';
+    const txt = parts.map(p => p.text || '').join(' ').trim().slice(0, 160);
+    throw new Error('AI가 이미지를 돌려주지 않았습니다' + (reason ? ` (${reason})` : '') + '. 장면 콘셉트를 조금 바꿔 다시 시도해주세요.' + (txt ? '\n모델 메시지: ' + txt : ''));
+  }
+  const d = imgPart.inlineData || imgPart.inline_data;
+  return { dataUrl: `data:${d.mimeType || d.mime_type || 'image/png'};base64,${d.data}`, model };
+}
+
+async function psGenerate() {
+  if (ps.busy) return;
+  if (ps.mode === 'natural' && !ps.products.length) {
+    toast('자연스러움 모드는 제품 이미지가 필요합니다. 제품을 올리거나 정확도 모드를 선택하세요.', 'warning', 5000);
+    return;
+  }
+  const btn = document.getElementById('psGenBtn');
+  const busy = document.getElementById('psBusy');
+  ps.busy = true;
+  btn.disabled = true;
+  busy.classList.add('on');
+  document.getElementById('psBusyText').textContent = ps.mode === 'natural' ? 'AI가 제품을 장면에 녹여 그리는 중…' : 'AI가 배경 장면을 만드는 중…';
+  psShowMsg('');
+  try {
+    const withProducts = ps.mode === 'natural';
+    const images = withProducts ? await Promise.all(ps.products.map(psProductForApi)) : [];
+    const prompt = psBuildImagePrompt(withProducts);
+    const out = await callGeminiImage(prompt, images.filter(Boolean), POSTER_FORMATS[ps.format].ar, ps.hiRes);
+    const img = await psLoadImage(out.dataUrl);
+    ps.bg = { dataUrl: out.dataUrl, img, mode: ps.mode, path: null };
+    ps.variants.unshift(ps.bg);
+    if (ps.variants.length > 8) ps.variants.length = 8;
+    psRenderVariants();
+    psSyncControls();
+    psRender();
+    psRenderCost();
+    psShowMsg(withProducts
+      ? '생성 완료. AI가 제품을 다시 그렸으니 통풍구·포트·형태가 원본과 같은지 꼭 확인하세요. 다르면 [정확도 우선]으로 바꿔 다시 생성하면 됩니다.'
+      : '생성 완료. 오른쪽에서 제품 위치·크기와 카피를 다듬은 뒤 저장하세요.', withProducts ? 'warn' : '');
+  } catch (e) {
+    psShowMsg(e.message, 'err');
+  } finally {
+    ps.busy = false;
+    btn.disabled = false;
+    busy.classList.remove('on');
+  }
+}
+
+function psRenderVariants() {
+  const el = document.getElementById('psVariants');
+  if (!el) return;
+  if (ps.variants.length < 2) { el.innerHTML = ''; return; }
+  el.innerHTML = ps.variants.map((v, i) =>
+    `<img class="ps-variant${v === ps.bg ? ' active' : ''}" src="${v.dataUrl || v.url}" title="${v.mode === 'natural' ? '자연스러움 모드' : '정확도 모드'} 결과 ${i + 1}" onclick="psPickVariant(${i})">`).join('');
+}
+function psPickVariant(i) {
+  const v = ps.variants[i];
+  if (!v) return;
+  ps.bg = v;
+  psRenderVariants(); psSyncControls(); psRender();
+}
+function psClearBg() {
+  ps.bg = null;
+  psRenderVariants(); psSyncControls(); psRender();
+  psShowMsg('');
+}
+
+/* ---------- 캔버스 합성 ---------- */
+function psDrawCover(ctx, img, W, H) {
+  const s = Math.max(W / img.naturalWidth, H / img.naturalHeight);
+  const w = img.naturalWidth * s, hh = img.naturalHeight * s;
+  ctx.drawImage(img, (W - w) / 2, (H - hh) / 2, w, hh);
+}
+
+function psDrawFallbackBg(ctx, W, H) {
+  const st = POSTER_STYLES[ps.style];
+  const [a, b, c] = st.fallback;
+  const g = ctx.createLinearGradient(0, 0, W * 0.35, H);
+  g.addColorStop(0, a); g.addColorStop(0.6, b); g.addColorStop(1, c);
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  const brand = BRANDS[ps.brand];
+  // 은은한 빛 번짐 + 바닥 반사면
+  const rg = ctx.createRadialGradient(W * 0.5, H * 0.7, 10, W * 0.5, H * 0.7, Math.max(W, H) * 0.7);
+  rg.addColorStop(0, st.tone === 'dark' ? 'rgba(80,140,255,.30)' : 'rgba(255,255,255,.85)');
+  rg.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.fillStyle = rg; ctx.fillRect(0, 0, W, H);
+  ctx.save();
+  ctx.globalAlpha = st.tone === 'dark' ? 0.55 : 0.35;
+  ctx.strokeStyle = brand.primary;
+  ctx.lineWidth = Math.max(2, W * 0.004);
+  for (let i = 0; i < 3; i++) {
+    ctx.beginPath();
+    const yb = H * (0.62 + i * 0.035);
+    ctx.moveTo(-20, yb);
+    ctx.bezierCurveTo(W * 0.3, yb - H * 0.12, W * 0.65, yb + H * 0.1, W + 20, yb - H * 0.05);
+    ctx.stroke();
+    ctx.globalAlpha *= 0.6;
+  }
+  ctx.restore();
+}
+
+function psRegionLuma(ctx, x, y, w, hgt) {
+  try {
+    x = Math.max(0, Math.floor(x)); y = Math.max(0, Math.floor(y));
+    w = Math.max(1, Math.floor(w)); hgt = Math.max(1, Math.floor(hgt));
+    const d = ctx.getImageData(x, y, w, hgt).data;
+    let sum = 0, n = 0;
+    const step = Math.max(4, Math.floor(d.length / 4 / 4000)) * 4;
+    for (let i = 0; i < d.length; i += step) { sum += 0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2]; n++; }
+    return n ? sum / n / 255 : 1;
+  } catch (e) { return 1; }
+}
+
+function psDrawProduct(ctx, p, W, H, tone) {
+  const img = p.img;
+  if (!img) return;
+  const hh = H * p.scale;
+  let w = hh * (img.naturalWidth / img.naturalHeight);
+  let dh = hh;
+  const maxW = W * 0.9;
+  if (w > maxW) { dh = dh * maxW / w; w = maxW; }
+  const cx = W * p.x, base = H * p.y;
+  const x = cx - w / 2, y = base - dh;
+  // 바닥 그림자
+  ctx.save();
+  const sg = ctx.createRadialGradient(cx, base, 1, cx, base, w * 0.62);
+  sg.addColorStop(0, tone === 'dark' ? 'rgba(0,0,0,.55)' : 'rgba(20,30,60,.32)');
+  sg.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.translate(cx, base); ctx.scale(1, 0.13); ctx.translate(-cx, -base);
+  ctx.fillStyle = sg;
+  ctx.beginPath(); ctx.arc(cx, base, w * 0.62, 0, Math.PI * 2); ctx.fill();
+  ctx.restore();
+  // 바닥 반사 (위아래 뒤집은 이미지가 아래로 갈수록 사라짐)
+  const refH = Math.min(dh * 0.22, H - base);
+  if (refH > 4) {
+    const off = document.createElement('canvas');
+    off.width = Math.max(1, Math.round(w)); off.height = Math.max(1, Math.round(refH));
+    const o = off.getContext('2d');
+    o.translate(0, dh); o.scale(1, -1);
+    o.drawImage(img, 0, 0, w, dh);
+    o.setTransform(1, 0, 0, 1, 0, 0);
+    o.globalCompositeOperation = 'destination-in';
+    const fg = o.createLinearGradient(0, 0, 0, refH);
+    fg.addColorStop(0, 'rgba(0,0,0,.28)'); fg.addColorStop(1, 'rgba(0,0,0,0)');
+    o.fillStyle = fg; o.fillRect(0, 0, off.width, off.height);
+    ctx.drawImage(off, x, base + 1);
+  }
+  ctx.drawImage(img, x, y, w, dh);
+}
+
+function psWrap(ctx, text, maxW) {
+  const out = [];
+  String(text || '').split('\n').forEach(par => {
+    if (!par.trim()) { return; }
+    const isCJK = /[ㄱ-힝]/.test(par);
+    const tokens = isCJK ? par.split(/(\s+)/) : par.split(/(\s+)/);
+    let line = '';
+    tokens.forEach(tok => {
+      const test = line + tok;
+      if (ctx.measureText(test.trimEnd()).width > maxW && line.trim()) { out.push(line.trim()); line = tok.trimStart(); }
+      else line = test;
+    });
+    // 한 단어가 너무 긴 경우 글자 단위로 자름
+    if (line.trim()) {
+      let l = line.trim();
+      while (ctx.measureText(l).width > maxW && l.length > 1) {
+        let cut = l.length - 1;
+        while (cut > 1 && ctx.measureText(l.slice(0, cut)).width > maxW) cut--;
+        out.push(l.slice(0, cut)); l = l.slice(cut);
+      }
+      out.push(l);
+    }
+  });
+  return out;
+}
+
+function psSetLetterSpacing(ctx, px) { try { if ('letterSpacing' in ctx) ctx.letterSpacing = px + 'px'; } catch (e) { /* 미지원 브라우저 */ } }
+
+function psFont(weight, size) {
+  return `${weight} ${Math.round(size)}px "Plus Jakarta Sans","Noto Sans KR","IBM Plex Sans",sans-serif`;
+}
+
+function psRenderTo(canvas, opts) {
+  opts = opts || {};
+  const f = POSTER_FORMATS[ps.format];
+  const W = f.w, H = f.h;
+  if (canvas.width !== W) canvas.width = W;
+  if (canvas.height !== H) canvas.height = H;
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.clearRect(0, 0, W, H);
+  const st = POSTER_STYLES[ps.style];
+  const side = psIsSide();
+  const bottomText = !side && ps.textPos === 'bottom';
+
+  // 1) 배경
+  if (ps.bg && ps.bg.img) psDrawCover(ctx, ps.bg.img, W, H);
+  else psDrawFallbackBg(ctx, W, H);
+
+  // 2) 제품 (정확도 모드 결과 또는 AI 배경이 없을 때 원본 합성)
+  const tone = st.tone;
+  if (!ps.bg || ps.bg.mode !== 'natural') {
+    ps.products.slice().sort((a, b) => a.y - b.y).forEach(p => psDrawProduct(ctx, p, W, H, tone));
+  }
+
+  // 3) 텍스트 영역/색 결정
+  const pad = Math.round(Math.min(W, H) * (side ? 0.07 : 0.075));
+  const zone = side ? { x: 0, y: 0, w: W * 0.5, h: H } : bottomText ? { x: 0, y: H * 0.6, w: W, h: H * 0.4 } : { x: 0, y: 0, w: W, h: H * 0.32 };
+  const luma = psRegionLuma(ctx, zone.x, zone.y, zone.w, zone.h);
+  const useLight = ps.textColor === 'light' || (ps.textColor === 'auto' && luma < 0.55);
+  const ink = useLight ? '#ffffff' : '#0B1533';
+  const ink2 = useLight ? 'rgba(255,255,255,.86)' : '#3A4664';
+
+  if (ps.scrim) {
+    ctx.save();
+    let g;
+    if (side) { g = ctx.createLinearGradient(0, 0, W * 0.62, 0); }
+    else if (bottomText) { g = ctx.createLinearGradient(0, H, 0, H * 0.52); }
+    else { g = ctx.createLinearGradient(0, 0, 0, H * 0.42); }
+    const c0 = useLight ? 'rgba(5,10,30,.42)' : 'rgba(255,255,255,.55)';
+    g.addColorStop(0, c0); g.addColorStop(1, useLight ? 'rgba(5,10,30,0)' : 'rgba(255,255,255,0)');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    // 하단 로고 줄도 살짝 보정
+    if (!side && !bottomText && (ps.showLogo || ps.tagline)) {
+      const g2 = ctx.createLinearGradient(0, H, 0, H * 0.8);
+      g2.addColorStop(0, useLight ? 'rgba(5,10,30,.35)' : 'rgba(255,255,255,.5)'); g2.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.fillStyle = g2; ctx.fillRect(0, H * 0.8, W, H * 0.2);
+    }
+    ctx.restore();
+  }
+
+  // 4) 헤드라인 + 서브카피
+  const align = side ? 'left' : ps.align;
+  const textX = align === 'left' ? pad : W / 2;
+  const maxW = side ? W * 0.46 : W - pad * 2;
+  const baseSize = (side ? Math.min(W * 0.045, H * 0.1) : W * 0.072) * (ps.headlineSize / 100);
+  ctx.textAlign = align === 'left' ? 'left' : 'center';
+  ctx.textBaseline = 'alphabetic';
+  let size = baseSize, lines = [];
+  ctx.font = psFont(800, baseSize);
+  psSetLetterSpacing(ctx, -baseSize * 0.025);
+  const widest = Math.max(1, ...String(ps.headline || '').split('\n').filter(l => l.trim()).map(l => ctx.measureText(l.trim()).width));
+  if (widest > maxW) size = Math.max(baseSize * 0.62, baseSize * maxW / widest * 0.98);
+  for (let i = 0; i < 12; i++) {
+    ctx.font = psFont(800, size);
+    psSetLetterSpacing(ctx, -size * 0.025);
+    lines = psWrap(ctx, ps.headline, maxW);
+    if (lines.length <= (side ? 4 : 3) || size < baseSize * 0.5) break;
+    size *= 0.92;
+  }
+  const lh = size * 1.12;
+  const subSize = Math.max(14, size * (side ? 0.42 : 0.36));
+  ctx.font = psFont(500, subSize);
+  psSetLetterSpacing(ctx, 0);
+  const subLines = ps.subline ? psWrap(ctx, ps.subline, maxW) : [];
+  const subLH = subSize * 1.4;
+  const blockH = lines.length * lh + (subLines.length ? size * 0.35 + subLines.length * subLH : 0);
+
+  let y0;
+  if (side) y0 = (H - blockH) / 2 - H * 0.06;
+  else if (bottomText) y0 = H - pad - (ps.showLogo ? H * 0.075 : 0) - (ps.tagline ? H * 0.07 : 0) - blockH;
+  else y0 = pad * 1.05;
+
+  ctx.fillStyle = ink;
+  ctx.font = psFont(800, size);
+  psSetLetterSpacing(ctx, -size * 0.025);
+  lines.forEach((ln, i) => ctx.fillText(ln, textX, y0 + size * 0.9 + i * lh));
+  if (subLines.length) {
+    ctx.font = psFont(500, subSize);
+    psSetLetterSpacing(ctx, 0);
+    ctx.fillStyle = ink2;
+    const sy = y0 + lines.length * lh + size * 0.35;
+    subLines.forEach((ln, i) => ctx.fillText(ln, textX, sy + subSize * 0.95 + i * subLH));
+  }
+
+  // 5) 하단 태그라인 (+ 파트너 로고) 과 KAON 로고
+  const logoImgs = LOGO_IMG_OBJS[ps.brand] || {};
+  const logo = useLight ? (logoImgs.white || logoImgs.color) : logoImgs.color;
+  const logoH = Math.round(Math.min(W, H) * (side ? 0.05 : 0.036));
+  const tagSize = Math.max(16, Math.min(W, H) * (side ? 0.042 : 0.05));
+  let tagBaseY, logoY, rowAlign;
+  if (side) {
+    rowAlign = 'left';
+    tagBaseY = y0 + blockH + tagSize * 1.9;
+    logoY = H - pad - logoH;
+  } else if (bottomText) {
+    rowAlign = align;
+    logoY = H - pad * 0.8 - logoH;
+    tagBaseY = logoY - logoH * 0.9;
+  } else {
+    rowAlign = align;
+    logoY = H - pad * 0.75 - logoH;
+    tagBaseY = logoY - logoH * 1.0;
+  }
+  if (ps.tagline || ps.partner) {
+    ctx.font = psFont(800, tagSize);
+    psSetLetterSpacing(ctx, -tagSize * 0.02);
+    ctx.fillStyle = ink;
+    ctx.textAlign = 'left';
+    let text = ps.tagline || '';
+    if (ps.partner && !text.includes('{logo}')) text = '{logo} ' + text;
+    const parts = text.split('{logo}');
+    const pImg = ps.partner && ps.partner.img;
+    const pH = tagSize * 1.25;
+    const pW = pImg ? pH * (pImg.naturalWidth / pImg.naturalHeight) : 0;
+    const gap = tagSize * 0.3;
+    const segs = [];
+    parts.forEach((t, i) => {
+      const tt = t.trim();
+      if (tt) segs.push({ t: tt, w: ctx.measureText(tt).width });
+      if (i < parts.length - 1 && pImg) segs.push({ img: pImg, w: pW });
+    });
+    const total = segs.reduce((s, sgm) => s + sgm.w, 0) + gap * Math.max(0, segs.length - 1);
+    let x = rowAlign === 'left' ? pad : (W - total) / 2;
+    segs.forEach(sgm => {
+      if (sgm.img) ctx.drawImage(sgm.img, x, tagBaseY - pH * 0.8, sgm.w, pH);
+      else ctx.fillText(sgm.t, x, tagBaseY);
+      x += sgm.w + gap;
+    });
+  }
+  if (ps.showLogo && logo && logo.complete && logo.naturalWidth) {
+    const lw = logoH * (logo.naturalWidth / logo.naturalHeight);
+    const lx = (side || rowAlign === 'left') ? pad : (W - lw) / 2;
+    ctx.drawImage(logo, lx, logoY, lw, logoH);
+  }
+  psSetLetterSpacing(ctx, 0);
+
+  // 6) 미리보기 전용 안내
+  if (opts.preview && !ps.bg) {
+    ctx.save();
+    ctx.font = psFont(600, Math.max(14, W * 0.017));
+    ctx.textAlign = 'center';
+    ctx.fillStyle = st.tone === 'dark' ? 'rgba(255,255,255,.55)' : 'rgba(11,21,51,.4)';
+    ctx.fillText('기본 배경 · [🎨 AI 이미지 생성]을 누르면 이 자리에 AI 장면이 들어갑니다', W / 2, H * (bottomText ? 0.33 : 0.5));
+    ctx.restore();
+  }
+}
+
+function psRender() {
+  const c = document.getElementById('psCanvas');
+  if (!c || document.getElementById('tab-poster').style.display === 'none') return;
+  psRenderTo(c, { preview: true });
+}
+
+function psExportBlob() {
+  return new Promise((resolve, reject) => {
+    const c = document.createElement('canvas');
+    psRenderTo(c, { preview: false });
+    try { c.toBlob(b => b ? resolve(b) : reject(new Error('이미지 변환 실패')), 'image/png'); }
+    catch (e) { reject(new Error('이미지를 내보낼 수 없습니다 (외부 이미지 보안 제한). 이미지를 다시 생성하거나 새로고침 후 다시 열어주세요.')); }
+  });
+}
+
+function psSafeFileName() {
+  const base = (ps.title || ps.headline.split('\n')[0] || 'KAON_poster').replace(/[\\/:*?"<>|\n\r]+/g, ' ').trim().slice(0, 40) || 'KAON_poster';
+  return `${base}_${POSTER_FORMATS[ps.format].w}x${POSTER_FORMATS[ps.format].h}.png`;
+}
+
+function psTriggerDownload(blob, name) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+}
+
+async function psDownload() {
+  if (!ps.headline.trim() && !ps.products.length && !ps.bg) { toast('헤드라인을 입력하거나 이미지를 만들어주세요', 'warning'); return; }
+  try { psTriggerDownload(await psExportBlob(), psSafeFileName()); }
+  catch (e) { toast(e.message, 'error', 6000); }
+}
+
+function psCopyCaption() {
+  const t = (ps.caption || '').trim();
+  if (!t) { toast('게시 문구가 비어 있습니다', 'warning'); return; }
+  psCopyText(t);
+}
+function psCopyText(t) {
+  const done = () => toast('문구를 복사했습니다. LinkedIn에 붙여넣으세요.', 'success', 2500);
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(t).then(done).catch(() => psCopyFallback(t, done));
+  else psCopyFallback(t, done);
+}
+function psCopyFallback(t, done) {
+  const ta = document.createElement('textarea'); ta.value = t; ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); done(); } catch (e) { toast('복사에 실패했습니다. 직접 선택해서 복사해주세요.', 'error'); }
+  ta.remove();
+}
+
+function psNewPoster() {
+  if ((ps.headline || ps.products.length || ps.bg) && !confirm('지금 작업 중인 내용을 비우고 새 포스터를 시작할까요?\n(라이브러리에 저장하지 않은 내용은 사라집니다)')) return;
+  Object.assign(ps, { topicId: '', sourceText: '', title: '', headline: '', subline: '', tagline: '', caption: '', scenePrompt: '',
+    products: [], activeProduct: 0, partner: null, bg: null, variants: [], editingId: null, suggestDate: '' });
+  psPersistDraft();
+  psRenderProducts(); psRenderPartner(); psRenderVariants(); psRenderTopicSelect(); psSyncControls(); psShowMsg(''); psRender();
+}
+
+/* ---------- 라이브러리 (Supabase) ---------- */
+function psPublicUrl(path) {
+  if (!path || !sb) return '';
+  return sb.storage.from('posters').getPublicUrl(path).data.publicUrl;
+}
+
+async function psUploadBlob(path, blob) {
+  const { error } = await sb.storage.from('posters').upload(path, blob, { contentType: blob.type || 'image/png', upsert: true, cacheControl: '3600' });
+  if (error) throw new Error('이미지 업로드 실패: ' + error.message);
+  return path;
+}
+
+async function psDataUrlToBlob(dataUrl) { const r = await fetch(dataUrl); return r.blob(); }
+
+function psUuid() {
+  if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16); });
+}
+
+let _psSaving = false;
+async function psSaveToLibrary() {
+  if (_psSaving) return;
+  if (!sb || !state.currentUser) { toast('로그인 후 저장할 수 있습니다', 'error'); return; }
+  if (!ps.headline.trim()) { toast('헤드라인을 입력해주세요', 'warning'); document.getElementById('psHeadline').focus(); return; }
+  _psSaving = true;
+  const btn = document.getElementById('psSaveBtn');
+  setLoading(btn, true, '저장 중…');
+  try {
+    const id = ps.editingId || psUuid();
+    const stamp = Date.now();
+    const finalBlob = await psExportBlob();
+    const imagePath = await psUploadBlob(`${id}/final-${stamp}.png`, finalBlob);
+    let bgPath = ps.bg ? ps.bg.path : null;
+    if (ps.bg && !bgPath && ps.bg.dataUrl) {
+      bgPath = await psUploadBlob(`${id}/bg-${stamp}.png`, await psDataUrlToBlob(ps.bg.dataUrl));
+      ps.bg.path = bgPath;
+    }
+    const prodMeta = [];
+    for (let i = 0; i < ps.products.length; i++) {
+      const p = ps.products[i];
+      if (!p.path) p.path = await psUploadBlob(`${id}/product${i}-${stamp}.png`, await psDataUrlToBlob(p.dataUrl));
+      prodMeta.push({ path: p.path, name: p.name, x: p.x, y: p.y, scale: p.scale, transparent: p.transparent });
+    }
+    if (ps.partner && !ps.partner.path) ps.partner.path = await psUploadBlob(`${id}/partner-${stamp}.png`, await psDataUrlToBlob(ps.partner.dataUrl));
+    const design = {
+      textPos: ps.textPos, align: ps.align, textColor: ps.textColor, headlineSize: ps.headlineSize, showLogo: ps.showLogo, scrim: ps.scrim,
+      lang: ps.lang, purpose: ps.purpose, scenePrompt: ps.scenePrompt, sourceText: ps.sourceText, bgMode: ps.bg ? ps.bg.mode : null,
+      products: prodMeta, partner: ps.partner ? { path: ps.partner.path, name: ps.partner.name } : null
+    };
+    const row = {
+      title: (ps.title || ps.headline.split('\n')[0]).slice(0, 80), brand: ps.brand, format: ps.format, style: ps.style, mode: ps.mode,
+      headline: ps.headline, subline: ps.subline, tagline: ps.tagline, caption: ps.caption,
+      image_path: imagePath, bg_path: bgPath, design, topic_id: ps.topicId || null
+    };
+    const existing = state.posters.find(p => p.id === id);
+    let saved;
+    if (existing) {
+      const { data, error } = await sb.from('posters').update(row).eq('id', id).select().single();
+      if (error) throw error;
+      saved = data;
+      // 예전 최종본 이미지는 정리 (배경/제품 원본은 계속 사용)
+      if (existing.image_path && existing.image_path !== imagePath) sb.storage.from('posters').remove([existing.image_path]).then(() => {});
+    } else {
+      const { data, error } = await sb.from('posters').insert(Object.assign({ id, created_by: state.currentUser.id, created_by_name: state.currentUser.displayName }, row)).select().single();
+      if (error) throw error;
+      saved = data;
+    }
+    ps.editingId = saved.id;
+    psUpsertLocal(saved);
+    psSyncControls();
+    toast(existing ? '포스터를 업데이트했습니다' : '라이브러리에 저장했습니다. 이제 게시일을 예약하세요.', 'success', 3500);
+    if (!existing) psOpenSchedule(saved.id);
+  } catch (e) {
+    toast('저장 실패: ' + (e.message || e), 'error', 6000);
+  } finally {
+    _psSaving = false;
+    setLoading(btn, false);
+  }
+}
+
+function psUpsertLocal(row) {
+  const i = state.posters.findIndex(p => p.id === row.id);
+  if (i >= 0) state.posters[i] = row; else state.posters.unshift(row);
+  psRenderLibrary();
+  if (typeof renderCalendar === 'function') renderCalendar();
+}
+
+async function psLoadPosters() {
+  if (!sb || !state.currentUser) return;
+  try {
+    const { data, error } = await sb.from('posters').select('*').order('created_at', { ascending: false }).limit(300);
+    if (error) throw error;
+    state.posters = data || [];
+    psRenderLibrary();
+    if (typeof renderCalendar === 'function') renderCalendar();
+  } catch (e) {
+    console.warn('[posters] 로드 실패', e.message);
+  }
+}
+
+let _psRtTimer = null;
+function psSubscribeRealtime() {
+  if (!sb) return;
+  sb.channel('posters_changes')
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'posters' }, payload => {
+      if (payload.eventType === 'DELETE') {
+        state.posters = state.posters.filter(p => p.id !== (payload.old && payload.old.id));
+        psRenderLibrary(); renderCalendar();
+        return;
+      }
+      if (payload.new) {
+        clearTimeout(_psRtTimer);
+        _psRtTimer = setTimeout(() => { psUpsertLocal(payload.new); }, 150);
+      }
+    })
+    .subscribe();
+}
+
+async function psAfterAuth() {
+  await psLoadPosters();
+  psSubscribeRealtime();
+  // 서버 예약 작업(매일 08:55)이 놓친 경우를 대비해 로그인 시 한 번 더 확인 (중복 알림은 서버에서 걸러짐)
+  try { await sb.rpc('send_poster_reminders'); } catch (e) { /* 무시 */ }
+}
+
+function psTodayStr() { const t = new Date(); return dateStr(t.getFullYear(), t.getMonth() + 1, t.getDate()); }
+
+function psStatusOf(p) {
+  if (p.status === 'posted') return { cls: 'posted', label: '✅ 게시완료' };
+  if (p.status === 'scheduled' && p.scheduled_date) {
+    if (p.scheduled_date < psTodayStr()) return { cls: 'overdue', label: '⚠ 게시일 지남' };
+    return { cls: 'scheduled', label: '📅 예약됨' };
+  }
+  return { cls: 'draft', label: '초안' };
+}
+
+function psFmtDateKo(s) {
+  if (!s) return '';
+  const [y, m, d] = s.split('-').map(Number);
+  const dt = new Date(y, m - 1, d);
+  return `${m}/${d}(${WEEKDAY_KO[dt.getDay()]})`;
+}
+
+function psSetLibFilter(v) { ps.libFilter = v; psSegActive('psLibFilter', v); psRenderLibrary(); }
+
+function psRenderLibrary() {
+  const g = document.getElementById('psLibGrid');
+  if (!g) return;
+  psSegActive('psLibFilter', ps.libFilter);
+  const me = state.currentUser && state.currentUser.id;
+  let list = state.posters.slice();
+  if (ps.libFilter === 'draft') list = list.filter(p => p.status === 'draft');
+  else if (ps.libFilter === 'scheduled') list = list.filter(p => p.status === 'scheduled');
+  else if (ps.libFilter === 'posted') list = list.filter(p => p.status === 'posted');
+  else if (ps.libFilter === 'mine') list = list.filter(p => (p.assignee_id || p.created_by) === me);
+  // 예약된 것은 게시일 순, 나머지는 최신순
+  list.sort((a, b) => {
+    const as = a.status === 'scheduled' ? 0 : 1, bs = b.status === 'scheduled' ? 0 : 1;
+    if (as !== bs) return as - bs;
+    if (as === 0) return (a.scheduled_date || '').localeCompare(b.scheduled_date || '');
+    return (b.created_at || '').localeCompare(a.created_at || '');
+  });
+  if (!list.length) {
+    g.innerHTML = `<div class="ps-empty">${state.posters.length ? '이 조건에 맞는 포스터가 없습니다.' : '아직 저장된 포스터가 없습니다. 위에서 만들고 [💾 라이브러리에 저장]을 눌러주세요.'}</div>`;
+    return;
+  }
+  g.innerHTML = list.map(p => {
+    const st = psStatusOf(p);
+    const assignee = p.assignee_id ? ((state.teamMembers.find(m => m.id === p.assignee_id) || {}).display_name || p.assignee_name || '') : '';
+    const fmt = POSTER_FORMATS[p.format] || POSTER_FORMATS.square;
+    const id = jsAttrStr(p.id);
+    return `<div class="ps-card${ps.focusId === p.id ? ' focus' : ''}" id="pscard_${h(p.id)}">
+      <div class="ps-card-img" onclick="psOpenPoster(${id})" title="열어서 수정"><img src="${h(psPublicUrl(p.image_path))}" alt="" loading="lazy"></div>
+      <div class="ps-card-body">
+        <div><span class="ps-badge ${st.cls}">${st.label}</span> <span style="font-size:10px;color:var(--text-muted)">${h((BRANDS[p.brand] || {}).label || '')} · ${fmt.ar === '16:9' && p.format === 'banner' ? '1.91:1' : h(fmt.label.split(' ')[0])}</span></div>
+        <div class="ps-card-title" title="${h(p.headline)}">${h(p.title || p.headline)}</div>
+        <div class="ps-card-meta">
+          ${p.scheduled_date ? `게시일 <b>${psFmtDateKo(p.scheduled_date)}</b>` : '게시일 미정'}${assignee ? ` · 담당 ${h(assignee)}` : ''}<br>
+          만든 사람 ${h(p.created_by_name || '-')}${p.status === 'posted' && p.posted_at ? ` · 게시 ${psFmtDateKo(p.posted_at.slice(0, 10))}` : ''}
+        </div>
+        <div class="ps-card-actions">
+          <button class="ps-mini" onclick="psOpenSchedule(${id})">📅 예약</button>
+          <button class="ps-mini" onclick="psDownloadSaved(${id})">⬇ PNG</button>
+          <button class="ps-mini" onclick="psCopySavedCaption(${id})">📋 문구</button>
+          ${p.status === 'posted'
+            ? `<button class="ps-mini" onclick="psMarkPosted(${id}, false)">↺ 게시 취소</button>`
+            : `<button class="ps-mini" onclick="psMarkPosted(${id}, true)">✅ 게시 완료</button>`}
+          <button class="ps-mini" onclick="psOpenPoster(${id})">✏️ 수정</button>
+          <button class="ps-mini danger" onclick="psDeletePoster(${id})">🗑</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function psDownloadSaved(id) {
+  const p = state.posters.find(x => x.id === id);
+  if (!p) return;
+  try {
+    const r = await fetch(psPublicUrl(p.image_path));
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const blob = await r.blob();
+    const fmt = POSTER_FORMATS[p.format] || POSTER_FORMATS.square;
+    psTriggerDownload(blob, `${(p.title || 'KAON_poster').replace(/[\\/:*?"<>|\n\r]+/g, ' ').slice(0, 40)}_${fmt.w}x${fmt.h}.png`);
+  } catch (e) { toast('다운로드 실패: ' + e.message, 'error'); }
+}
+
+function psCopySavedCaption(id) {
+  const p = state.posters.find(x => x.id === id);
+  if (!p || !(p.caption || '').trim()) { toast('저장된 게시 문구가 없습니다', 'warning'); return; }
+  psCopyText(p.caption);
+}
+
+async function psMarkPosted(id, posted) {
+  const p = state.posters.find(x => x.id === id);
+  if (!p) return;
+  const patch = posted ? { status: 'posted', posted_at: new Date().toISOString() } : { status: p.scheduled_date ? 'scheduled' : 'draft', posted_at: null };
+  const { data, error } = await sb.from('posters').update(patch).eq('id', id).select().single();
+  if (error) { toast('변경 실패: ' + error.message, 'error'); return; }
+  psUpsertLocal(data);
+  toast(posted ? '게시 완료로 기록했습니다' : '게시 완료를 취소했습니다', 'success', 2500);
+  // 다른 사람이 만든 포스터면 만든 사람에게 알림
+  if (posted && data.created_by && data.created_by !== state.currentUser.id) {
+    createNotification(data.created_by, 'poster_posted', `✅ ${state.currentUser.displayName}님이 "${data.title}" 포스터를 LinkedIn에 게시 완료했습니다.`, 'poster:' + id);
+  }
+}
+
+async function psDeletePoster(id) {
+  const p = state.posters.find(x => x.id === id);
+  if (!p) return;
+  if (!confirm(`"${p.title || p.headline}" 포스터를 삭제할까요?\n이미지와 예약 정보가 모두 지워지며 되돌릴 수 없습니다.`)) return;
+  const { error } = await sb.from('posters').delete().eq('id', id);
+  if (error) { toast('삭제 실패: ' + error.message, 'error'); return; }
+  try {
+    const { data: files } = await sb.storage.from('posters').list(id, { limit: 100 });
+    if (files && files.length) await sb.storage.from('posters').remove(files.map(f => `${id}/${f.name}`));
+  } catch (e) { console.warn('[posters] 파일 정리 실패', e.message); }
+  state.posters = state.posters.filter(x => x.id !== id);
+  if (ps.editingId === id) { ps.editingId = null; psSyncControls(); }
+  psRenderLibrary();
+  renderCalendar();
+  toast('삭제했습니다', 'info', 2000);
+}
+
+async function psOpenPoster(id) {
+  const p = state.posters.find(x => x.id === id);
+  if (!p) return;
+  switchTab('poster');
+  const d = p.design || {};
+  Object.assign(ps, {
+    brand: p.brand, format: p.format, style: p.style, mode: p.mode, title: p.title || '',
+    headline: p.headline || '', subline: p.subline || '', tagline: p.tagline || '', caption: p.caption || '',
+    scenePrompt: d.scenePrompt || '', sourceText: d.sourceText || '', purpose: d.purpose || 'product', lang: d.lang || 'en',
+    textPos: d.textPos || 'top', align: d.align || 'center', textColor: d.textColor || 'auto', headlineSize: d.headlineSize || 100,
+    showLogo: d.showLogo !== false, scrim: d.scrim !== false, topicId: p.topic_id || '',
+    editingId: p.id, products: [], partner: null, bg: null, variants: [], activeProduct: 0
+  });
+  psSyncControls();
+  psRender();
+  document.getElementById('psHero').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const busy = document.getElementById('psBusy');
+  document.getElementById('psBusyText').textContent = '저장된 포스터를 불러오는 중…';
+  busy.classList.add('on');
+  try {
+    if (p.bg_path) {
+      const img = await psLoadImage(psPublicUrl(p.bg_path), true);
+      ps.bg = { img, url: psPublicUrl(p.bg_path), mode: d.bgMode || p.mode, path: p.bg_path, dataUrl: null };
+      ps.variants = [ps.bg];
+    }
+    for (const m of (d.products || [])) {
+      try {
+        const img = await psLoadImage(psPublicUrl(m.path), true);
+        ps.products.push({ img, dataUrl: psPublicUrl(m.path), name: m.name, x: m.x, y: m.y, scale: m.scale, transparent: m.transparent !== false, path: m.path });
+      } catch (e) { console.warn('[posters] 제품 이미지 로드 실패', m.path); }
+    }
+    if (d.partner && d.partner.path) {
+      try { const img = await psLoadImage(psPublicUrl(d.partner.path), true); ps.partner = { img, dataUrl: psPublicUrl(d.partner.path), name: d.partner.name, path: d.partner.path }; } catch (e) { /* 무시 */ }
+    }
+  } catch (e) {
+    toast('일부 이미지를 불러오지 못했습니다: ' + e.message, 'warning', 5000);
+  } finally {
+    busy.classList.remove('on');
+  }
+  psRenderProducts(); psRenderPartner(); psRenderVariants(); psRenderTopicSelect(); psSyncControls(); psRender(); psPersistDraft();
+  toast('포스터를 불러왔습니다. 수정 후 [💾 라이브러리에 저장]을 누르면 덮어씁니다.', 'info', 4000);
+}
+
+function psFocusPoster(id) {
+  switchTab('poster');
+  ps.focusId = id;
+  ps.libFilter = 'all';
+  psRenderLibrary();
+  const el = document.getElementById('pscard_' + id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  setTimeout(() => { ps.focusId = null; const e2 = document.getElementById('pscard_' + id); if (e2) e2.classList.remove('focus'); }, 4000);
+}
+
+/* ---------- 게시 예약 + 추천일 ---------- */
+function psBusyDates(excludeId) {
+  const busy = {};
+  const add = (k, why) => { if (!k) return; (busy[k] = busy[k] || []).push(why); };
+  state.posters.forEach(p => { if (p.id !== excludeId && p.status !== 'draft' && p.scheduled_date) add(p.scheduled_date, `포스터 "${(p.title || '').slice(0, 18)}"`); });
+  Object.entries(state.schedule || {}).forEach(([k, ids]) => { if (ids && ids.length) add(k, `기사 포스팅 ${ids.length}건`); });
+  try {
+    state.campaigns.flatMap(c => getCampaignSlots(c)).forEach(s => {
+      const st = state.campStatus[s.campaignId + '_' + s.label] || {};
+      if (!st.deleted) add(s.date, `${s.campaignName} ${s.label}`);
+    });
+  } catch (e) { /* 캠페인 데이터 없음 */ }
+  return busy;
+}
+
+function psRecommendDates(poster) {
+  const busy = psBusyDates(poster && poster.id);
+  const maxImp = Math.max(...Object.values(WEEKDAY_STATS).map(s => s.imp));
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  // 다가오는 루틴 일정(전시회 등)의 권장 게시일
+  const routineHints = {};
+  try {
+    routineComputeItems(30).forEach(it => {
+      if (it.daysLeft < 1) return;
+      const k = dateStr(it.date.getFullYear(), it.date.getMonth() + 1, it.date.getDate());
+      (routineHints[k] = routineHints[k] || []).push(`${it.eventName} ${it.label} 권장일`);
+    });
+  } catch (e) { /* 무시 */ }
+  const purpose = (poster && poster.design && poster.design.purpose) || ps.purpose;
+  const cands = [];
+  for (let i = 1; i <= 21; i++) {
+    const dt = new Date(today); dt.setDate(today.getDate() + i);
+    const dow = dt.getDay();
+    const stat = WEEKDAY_STATS[dow];
+    if (!stat) continue; // 주말 제외 (과거 게시 3건뿐, 성과 낮음)
+    const k = dateStr(dt.getFullYear(), dt.getMonth() + 1, dt.getDate());
+    let score = stat.imp / maxImp;
+    const why = [`과거 ${WEEKDAY_KO[dow]}요일 게시물 노출 중앙값 ${stat.imp.toLocaleString()}회 (${stat.n}건)`];
+    if (busy[k]) { score -= 0.45; why.push(`같은 날 다른 게시 예정: ${busy[k].slice(0, 2).join(', ')}`); }
+    else {
+      const prev = new Date(dt); prev.setDate(dt.getDate() - 1);
+      const next = new Date(dt); next.setDate(dt.getDate() + 1);
+      const pk = dateStr(prev.getFullYear(), prev.getMonth() + 1, prev.getDate()), nk = dateStr(next.getFullYear(), next.getMonth() + 1, next.getDate());
+      if (busy[pk] || busy[nk]) { score -= 0.08; why.push('앞뒤 날짜에 게시 일정 있음'); }
+      else why.push('앞뒤로 겹치는 게시 없음');
+    }
+    if (routineHints[k]) { score += purpose === 'event' ? 0.35 : 0.1; why.push('📌 ' + routineHints[k][0]); }
+    if (ps.suggestDate && k === ps.suggestDate && !poster) { score += 0.4; why.push('📌 선택한 일정의 권장 게시일'); }
+    score -= i * 0.006; // 너무 먼 날짜보다는 가까운 날짜 약간 우선
+    cands.push({ date: k, score, why });
+  }
+  // 같은 요일만 3개 나오지 않도록 서로 다른 요일로 고름 (이벤트 권장일은 예외로 우선)
+  cands.sort((a, b) => b.score - a.score);
+  const picked = [], usedDow = new Set();
+  for (const c of cands) {
+    const [y, m, d] = c.date.split('-').map(Number);
+    const dow = new Date(y, m - 1, d).getDay();
+    const pinned = c.why.some(w => w.indexOf('📌') === 0);
+    if (usedDow.has(dow) && !pinned) continue;
+    usedDow.add(dow); picked.push(c);
+    if (picked.length === 3) break;
+  }
+  return picked.sort((a, b) => b.score - a.score);
+}
+
+let _psSchedId = null;
+async function psOpenSchedule(id) {
+  const p = state.posters.find(x => x.id === id);
+  if (!p) return;
+  _psSchedId = id;
+  document.getElementById('psSchedImg').src = psPublicUrl(p.image_path);
+  document.getElementById('psSchedHeadline').textContent = p.headline || p.title;
+  document.getElementById('psSchedMeta').textContent = `${(BRANDS[p.brand] || {}).label || ''} · ${psStatusOf(p).label}${p.scheduled_date ? ' · 현재 게시일 ' + psFmtDateKo(p.scheduled_date) : ''}`;
+  const dateIn = document.getElementById('psSchedDate');
+  const recs = psRecommendDates(p);
+  dateIn.value = p.scheduled_date || (recs[0] && recs[0].date) || '';
+  dateIn.min = psTodayStr();
+  const recBox = document.getElementById('psSchedRecs');
+  recBox.innerHTML = recs.length ? recs.map((r, i) => `
+    <div class="ps-rec-item${r.date === dateIn.value ? ' active' : ''}" data-date="${r.date}" onclick="psPickRec('${r.date}')">
+      <div class="ps-rec-date">${i === 0 ? '⭐ ' : ''}${psFmtDateKo(r.date)}</div>
+      <div class="ps-rec-why">${r.why.map(h).join('<br>')}</div>
+    </div>`).join('') : '<div class="ps-note">앞으로 3주 안에 추천할 평일이 없습니다. 날짜를 직접 지정해주세요.</div>';
+  dateIn.oninput = () => recBox.querySelectorAll('.ps-rec-item').forEach(el => el.classList.toggle('active', el.dataset.date === dateIn.value));
+  const sel = document.getElementById('psSchedAssignee');
+  try { await loadTeamMembers(); } catch (e) { /* 캐시 사용 */ }
+  sel.innerHTML = '<option value="">— 지정 안 함 (만든 사람에게 알림) —</option>' +
+    state.teamMembers.map(m => `<option value="${h(m.id)}"${m.id === p.assignee_id ? ' selected' : ''}>${h(m.display_name)}${state.currentUser && m.id === state.currentUser.id ? ' (나)' : ''}</option>`).join('');
+  document.getElementById('psSchedUnsetBtn').style.display = p.scheduled_date ? '' : 'none';
+  document.getElementById('psSchedModal').classList.add('open');
+}
+function psPickRec(date) {
+  document.getElementById('psSchedDate').value = date;
+  document.querySelectorAll('#psSchedRecs .ps-rec-item').forEach(el => el.classList.toggle('active', el.dataset.date === date));
+}
+function psCloseSchedule() { document.getElementById('psSchedModal').classList.remove('open'); _psSchedId = null; }
+
+async function psSaveSchedule() {
+  const p = state.posters.find(x => x.id === _psSchedId);
+  if (!p) { psCloseSchedule(); return; }
+  const date = document.getElementById('psSchedDate').value;
+  if (!date) { toast('게시일을 선택해주세요', 'warning'); return; }
+  if (date < psTodayStr() && !confirm('지난 날짜입니다. 그래도 이 날짜로 지정할까요?')) return;
+  const assigneeId = document.getElementById('psSchedAssignee').value || null;
+  const member = state.teamMembers.find(m => m.id === assigneeId);
+  const patch = { scheduled_date: date, status: p.status === 'posted' ? 'posted' : 'scheduled', assignee_id: assigneeId, assignee_name: member ? member.display_name : null };
+  const { data, error } = await sb.from('posters').update(patch).eq('id', p.id).select().single();
+  if (error) { toast('예약 실패: ' + error.message, 'error'); return; }
+  psUpsertLocal(data);
+  if (assigneeId && assigneeId !== p.assignee_id) {
+    createNotification(assigneeId, 'poster_assign', `🖼 ${state.currentUser.displayName}님이 "${data.title}" 포스터 게시를 맡겼습니다 · 게시일 ${psFmtDateKo(date)}`, 'poster:' + p.id);
+  } else if (assigneeId && p.scheduled_date !== date) {
+    createNotification(assigneeId, 'poster_assign', `📅 "${data.title}" 포스터 게시일이 ${psFmtDateKo(date)}로 바뀌었습니다 (${state.currentUser.displayName})`, 'poster:' + p.id);
+  }
+  psCloseSchedule();
+  toast(`${psFmtDateKo(date)} 게시로 예약했습니다. 전날·당일에 알림이 갑니다.`, 'success', 3500);
+  // 오늘/내일 날짜면 바로 알림 생성
+  try { await sb.rpc('send_poster_reminders'); } catch (e) { /* 무시 */ }
+}
+
+async function psUnschedule() {
+  const p = state.posters.find(x => x.id === _psSchedId);
+  if (!p) return;
+  const { data, error } = await sb.from('posters').update({ scheduled_date: null, status: p.status === 'posted' ? 'posted' : 'draft' }).eq('id', p.id).select().single();
+  if (error) { toast('변경 실패: ' + error.message, 'error'); return; }
+  psUpsertLocal(data);
+  psCloseSchedule();
+  toast('예약을 해제했습니다', 'info', 2000);
+}
+
+/* ---------- 캘린더 연동 ---------- */
+function psCalendarChips(key) {
+  return (state.posters || []).filter(p => p.scheduled_date === key && p.status !== 'draft').map(p => {
+    const t = (p.title || p.headline || '').replace(/\n/g, ' ');
+    const short = t.length > 18 ? t.slice(0, 16) + '…' : t;
+    return `<div class="cal-chip-poster${p.status === 'posted' ? ' posted' : ''}" onclick="psFocusPoster(${jsAttrStr(p.id)})" title="${h(t)}">
+      <span>${p.status === 'posted' ? '✅' : '🖼'}</span><span class="cal-chip-title">${h(short)}</span></div>`;
+  }).join('');
+}
+
+/* ---------- 설정: 이미지 생성 키 ---------- */
+function psInitSettings() {
+  const k = document.getElementById('cfgImgKey');
+  const m = document.getElementById('cfgImgModel');
+  if (k) k.value = lsStr(SK_IMG_KEY);
+  if (m) m.value = lsStr(SK_IMG_MODEL);
+  const s = document.getElementById('cfgImgStatus');
+  if (s) { const set = !!lsStr(SK_IMG_KEY); s.className = 'form-status ' + (set ? 'status-set' : 'status-unset'); s.textContent = set ? '● 설정됨' : '○ 기본 키 사용'; }
+}
+function psSaveImgSettings() {
+  const k = (document.getElementById('cfgImgKey').value || '').trim();
+  const m = (document.getElementById('cfgImgModel').value || '').trim();
+  if (k) lsSetStr(SK_IMG_KEY, k); else lsDel(SK_IMG_KEY);
+  if (m) lsSetStr(SK_IMG_MODEL, m); else lsDel(SK_IMG_MODEL);
+  psInitSettings();
+  psRenderCost();
+  toast('이미지 생성 설정을 저장했습니다', 'success', 2000);
+}
+
+
 function init() {
   // Restore persisted state
   state.articles = lsGet(SK.ARTICLES, []);
@@ -3973,12 +5891,14 @@ function init() {
   renderRoutineCalendar();
   initSettingsUI();
   renderAll();
+  switchTab('poster');
+  tAutoStart();
 
   // Auto-open settings if nothing is configured
-  if (!lsStr(SK.GROQ_KEY)) {
+  if (!lsStr(SK.GROQ_KEY) && localStorage.getItem('lip_tour_v4')) {
     setTimeout(() => {
       toggleSettings();
-      toast('GitHub 레포와 Groq API 키를 설정해주세요.', 'info', 6000);
+      toast('⚙️ 설정에서 Gemini API 키를 입력해주세요.', 'info', 6000);
     }, 400);
   }
 }
@@ -4781,28 +6701,43 @@ function deleteChipImage() {
 /* ===== TOUR JS ===== */
 var _ti = 0;
 var _tSteps = [
-  {k:'box', icon:'👋', title:'KAON LinkedIn Planner에 오신 걸 환영합니다!',
-   body:'뉴스에서 LinkedIn 포스팅 주제를 AI로 자동 추출하고,\n캠페인·담당자·댓글·알림까지 팀 전체가 실시간으로\n같이 관리하는 도구입니다.\n\n2분 안에 사용법을 안내해드릴게요!',
+  {k:'box', icon:'👋', title:'KAON Content Agent에 오신 걸 환영합니다!',
+   body:'기사·일정을 소재로 AI가 카피를 기획하고,\n제품 누끼만 올리면 테크 브랜드 톤의 포스터·배너까지 만들어\n게시 예약·알림·팀 협업까지 한 곳에서 처리하는 도구입니다.\n\n2분 안에 사용법을 안내해드릴게요!',
    grid:true, mainBtn:'시작하기 →', skipBtn:'건너뛰기'},
   {k:'tip', sel:'#settingsToggleBtn',  pos:'bl',
    title:'⚙️ 1단계: 설정 열기',
    body:'우측 상단 ⚙️ 버튼을 클릭하면 설정 패널이 열립니다.\n\n• Repository: bale716/KAON_NEWS (자동 입력됨)\n• Gemini API Key는 각자 본인 것을 무료로 발급받아 입력 (팀원과 공유 안 됨)\n• 뉴스 불러오기 버튼으로 최신 뉴스 불러오기'},
-  {k:'tip', sel:'.kpi-grid',           pos:'b',
+  {k:'tip', tab:'poster', sel:'#psTopicSelect', pos:'b',
+   title:'🎨 포스터 제작 ① 소재 고르기',
+   body:'추출된 기사 주제나 다가오는 전시회·행사 일정을 고르면\n핵심 메시지가 자동으로 채워집니다. 직접 입력해도 됩니다.\n\n기사·일정 관리 탭의 주제 카드에 있는 [🎨 포스터] 버튼으로도 바로 시작할 수 있어요.'},
+  {k:'tip', tab:'poster', sel:'#psModeBox', pos:'b',
+   title:'📦 ② 제품 누끼 + 처리 방식',
+   body:'투명 PNG 제품 사진을 올리고 방식을 고르세요.\n\n• 정확도 우선: AI는 배경만, 제품은 원본 그대로 합성 (디테일 100% 유지)\n• 자연스러움 우선: AI가 제품을 장면 속에 그림 (형태가 바뀔 수 있어 확인 필수)'},
+  {k:'tip', tab:'poster', sel:'#psPlanBtn', pos:'t',
+   title:'✨ ③ AI 카피·장면 기획',
+   body:'헤드라인·서브카피·태그라인·장면 콘셉트·LinkedIn 게시 문구를 한 번에 만듭니다.\n무료 Gemini 키로 동작하며, 소재에 없는 수치나 고객명은 만들지 않도록 지시돼 있습니다.'},
+  {k:'tip', tab:'poster', sel:'#psGenBtn', pos:'t',
+   title:'🎨 ④ AI 이미지 생성 → 다듬기',
+   body:'결제가 연결된 Gemini 키로 장면을 생성합니다 (1장 약 $0.07~0.13).\nKAON 로고와 카피는 AI가 아니라 실제 로고 파일·폰트로 얹기 때문에 글자가 깨지지 않습니다.\n\n오른쪽에서 문구·글자색·제품 위치를 조절하고 PNG로 받거나 저장하세요.'},
+  {k:'tip', tab:'poster', sel:'#psLibrary .ps-lib-head', pos:'t',
+   title:'📅 ⑤ 라이브러리 · 게시 예약',
+   body:'저장한 포스터는 팀 전체가 같이 봅니다.\n[📅 예약]에서 과거 KAON 게시물 성과 기반 추천일을 보고 날짜·담당자를 정하면\n전날과 당일 오전에 담당자에게 알림이 갑니다. 게시 후엔 [✅ 게시 완료]!'},
+  {k:'tip', tab:'planner', sel:'.kpi-grid',           pos:'b',
    title:'📥 2단계: 뉴스 로드 확인',
    body:'뉴스 불러오기를 클릭하면 KAON 뉴스 기사가\n여기 숫자로 표시됩니다.\n\n✅ 숫자가 보이면 다음 단계로!'},
-  {k:'tip', sel:'#extractTopicsSection', pos:'b',
+  {k:'tip', tab:'planner', sel:'#extractTopicsSection', pos:'b',
    title:'✨ 3단계: AI 토픽 추출',
    body:'우측 "AI 주제 추출" 버튼을 클릭하면\nAI가 뉴스를 분석해 LinkedIn 포스팅 주제를 자동 추천합니다.\n\n각 주제에는 추천 이유, 포맷(Carousel/Text/Infographic), 소스 기사가 포함됩니다.'},
-  {k:'tip', sel:'#calSection',          pos:'t',
+  {k:'tip', tab:'planner', sel:'#calSection',          pos:'t',
    title:'📅 4단계: 콘텐츠 캘린더 (전체 일정 한눈에)',
    body:'주제 카드의 "Schedule" 버튼으로 날짜를 지정하거나\n"자동 일정 배치"로 자동 배치합니다.\n\n캠페인 슬롯, 루틴 콘텐츠까지 전부 이 캘린더 한 곳에서\n실시간으로 보입니다 (팀원이 뭘 바꾸든 바로 반영돼요).'},
-  {k:'tip', sel:'#routineManageBtn',    pos:'b',
+  {k:'tip', tab:'planner', sel:'#routineManageBtn',    pos:'b',
    title:'🗓 루틴 콘텐츠 캘린더',
    body:'전시회(IBC, CES 등)·사내행사·정기 시리즈처럼\n매년/매월 반복되는 콘텐츠를 놓치지 않게 알려주는 알림입니다.\n\n임박한 항목이 있을 때만 여기 빨간 배너로 뜨고,\n"관리하기"에서 날짜 확정·일정 전체를 볼 수 있어요.'},
-  {k:'tip', sel:'#campaignSection',     pos:'b',
+  {k:'tip', tab:'planner', sel:'#campaignSection',     pos:'b',
    title:'🎯 5단계: 캠페인 진행 관리',
    body:'"+ 이벤트 추가"로 캠페인을 만들면 D-14~D+3 같은 콘텐츠 슬롯이\n자동 생성됩니다. 필요 없는 슬롯은 만들기 전에 클릭해서 끌 수 있어요.\n\n생성할 때 담당자를 바로 지정하면 전체 슬롯에 한 번에 배정되고\n알림이 갑니다.'},
-  {k:'tip', sel:'.slot-row',            pos:'b',
+  {k:'tip', tab:'planner', sel:'.slot-row',            pos:'b',
    title:'👤 담당자 · 상태 · 댓글 · @멘션',
    body:'슬롯을 클릭하면 상세 화면이 열립니다.\n\n• 담당자: 목록에서 클릭해서 선택 (오타로 알림 안 가는 일 없음)\n• 상태: 미작업→작업중→게시완료, "저장"을 눌러야 확정됨\n• 댓글: @이름 입력하면 그 팀원에게 알림이 갑니다\n\n담당자로 지정되거나 언급되면 실시간 알림이 옵니다.'},
   {k:'tip', sel:'#myTasksBtn',          pos:'bl',
@@ -4818,13 +6753,13 @@ var _tSteps = [
    title:'🎠 7단계: 캐러셀 디자이너',
    body:'KAON GROUP/BROADBAND/ROBOTICS 브랜드 톤에 맞는\nLinkedIn 캐러셀 이미지를 바로 만들 수 있습니다.\n\n주제에서 내용을 가져와 슬라이드를 채우고,\nPNG로 다운로드해서 바로 게시하세요.'},
   {k:'box', icon:'🎉', title:'준비 완료!',
-   body:'이제 KAON LinkedIn Planner를 팀과 함께 자유롭게 사용하세요.\n\n작업 데이터는 실시간으로 공유되니, 각자 로그인만 하면\n같은 화면을 보게 됩니다.\n\n우측 상단의 "사용 가이드" 버튼을 클릭하면\n언제든지 이 가이드를 다시 볼 수 있습니다.',
+   body:'이제 KAON Content Agent를 팀과 함께 자유롭게 사용하세요.\n\n작업 데이터는 실시간으로 공유되니, 각자 로그인만 하면\n같은 화면을 보게 됩니다.\n\n우측 상단의 "사용 가이드" 버튼을 클릭하면\n언제든지 이 가이드를 다시 볼 수 있습니다.',
    grid:false, mainBtn:'시작하기!', skipBtn:''}
 ];
 
 function tStart() {
   _ti = 0;
-  localStorage.removeItem('lip_tour_v3');
+  localStorage.removeItem('lip_tour_v4');
   document.getElementById('tOverlay').style.display = 'block';
   try {
     tShow(0);
@@ -4838,7 +6773,7 @@ function tEnd() {
   document.getElementById('tBox').style.display = 'none';
   document.getElementById('tCard').style.display = 'none';
   document.getElementById('tHl').style.display = 'none';
-  localStorage.setItem('lip_tour_v3', '1');
+  localStorage.setItem('lip_tour_v4', '1');
 }
 function tNext() { tGo(_ti + 1); }
 function tPrev() { tGo(_ti - 1); }
@@ -4865,6 +6800,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 function tShow(n) {
   var s = _tSteps[n];
+  if (s.tab && typeof switchTab === 'function') switchTab(s.tab);
   document.getElementById('tOverlay').style.display = 'block';
   if (s.k === 'box') {
     document.getElementById('tHl').style.display = 'none';
@@ -4877,7 +6813,7 @@ function tShow(n) {
     var grid = document.getElementById('tGrid');
     if (s.grid) {
       grid.style.display = 'grid';
-      grid.innerHTML = ['📥 뉴스 자동 수집','✨ AI 토픽 추출','📅 콘텐츠 캘린더','🎯 캠페인·담당자','💬 댓글·알림','🎠 캐러셀 디자이너'].map(function(f){ return '<div>'+f+'</div>'; }).join('');
+      grid.innerHTML = ['🎨 AI 포스터·배너','✨ AI 카피 기획','📅 게시 예약·추천일','🎯 캠페인·담당자','💬 댓글·알림','🎠 캐러셀 디자이너'].map(function(f){ return '<div>'+f+'</div>'; }).join('');
     } else {
       grid.style.display = 'none';
       grid.innerHTML = '';
@@ -4933,12 +6869,10 @@ function tShow(n) {
     nextBtn.textContent = (n === _tSteps.length - 2) ? '완료 →' : '다음 →';
   }
 }
-// 첫 방문 자동 투어 시작
-setTimeout(function(){
-  if (!localStorage.getItem('lip_tour_v3')) {
-    tStart();
-  }
-}, 800);
+// 첫 방문 자동 투어는 로그인 후 init()에서 시작합니다 (로그인 화면 위에 투어가 뜨면 화면이 막힌 것처럼 보였음)
+function tAutoStart() {
+  if (!localStorage.getItem('lip_tour_v4')) setTimeout(function(){ try { tStart(); } catch (e) { tEnd(); } }, 700);
+}
 
 </script>
 
